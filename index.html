@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=1080, initial-scale=1.0, maximum-scale=1.0">
 <title>Delivery Plan Dashboard</title>
 <link rel="icon" type="image/png" href="Logo.webp">
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,82 +16,83 @@
     --glass-hover: rgba(255,255,255,0.60);
     --blue: #2563eb;
     --green: #2d7d72;
+    --green-rgb: 45,125,114;
     --red: #E05C63;
+    --red-rgb: 224,92,99;
     --amber: #d97706;
     --indigo: #63d7f1;
     --text: rgba(10,20,50,0.92);
     --text-muted: rgba(10,20,50,0.58);
     --text-dim: rgba(10,20,50,0.38);
     --border: rgba(160,200,255,0.35);
-    --shadow: 0 2px 12px rgba(60,100,200,0.12);
+    --shadow: 0 2px 10px rgba(60,100,200,0.10);
     --transition: .25s cubic-bezier(.4,0,.2,1);
     --radius: 10px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body {
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Kanit', 'DM Mono', sans-serif;
+  /* ── PORTRAIT 1080×1920 FIT ── */
+  html {
     font-size: 13px;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
   }
-
   body {
+    font-family: 'Kanit', 'DM Mono', sans-serif;
     background: linear-gradient(145deg, #aecff5 0%, #c3dff8 30%, #d8eeff 60%, #cce5f8 100%);
     background-attachment: fixed;
     color: var(--text);
-    width: 100%;
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
   body::before {
     content: '';
     position: fixed; inset: 0; z-index: 0;
     background:
       radial-gradient(ellipse 80% 40% at 20% 0%, rgba(255,255,255,0.55) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 60% at 85% 90%, rgba(147,210,255,0.45) 0%, transparent 55%);
+      radial-gradient(ellipse 60% 60% at 85% 90%, rgba(147,210,255,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 50% at 50% 50%, rgba(200,230,255,0.25) 0%, transparent 60%);
     pointer-events: none;
-  }
-
-  /* ── PAGE SHELL: topbar + content ── */
-  .shell {
-    position: relative; z-index: 1;
-    height: 100vh;
-    display: grid;
-    grid-template-rows: 44px 1fr;
-    overflow: hidden;
   }
 
   /* ── TOPBAR ── */
   .topbar {
+    position: relative; z-index: 50;
     background: rgba(255,255,255,0.60);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border-bottom: 1px solid rgba(255,255,255,0.85);
-    box-shadow: 0 2px 10px rgba(80,130,220,0.09);
-    padding: 0 12px;
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    width: 100%;
-    height: 44px;
+    box-shadow: 0 2px 16px rgba(80,130,220,0.10);
+    padding: 7px 18px;
+    height: 52px;
     flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    width: 100%;
   }
-  .topbar-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
-  .topbar-logo { font-size: 18px; flex-shrink: 0; }
-  .topbar-title { font-size: 12px; font-weight: 700; color: #1e3a8a; white-space: nowrap; }
-  .topbar-sub { font-size: 9px; color: var(--text-dim); }
-  .topbar-right { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+  .topbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .topbar-logo { font-size: 20px; flex-shrink: 0; }
+  .topbar-title { font-size: 15px; font-weight: 700; color: #1e3a8a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar-sub { font-size: 11px; color: var(--text-dim); }
+  .topbar-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .today-badge {
     background: rgba(219,234,254,0.85); color: var(--blue);
-    font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 20px;
+    font-size: 13px; font-weight: 600; padding: 5px 14px; border-radius: 20px;
     border: 1px solid rgba(37,99,235,0.3); white-space: nowrap;
   }
   .settings-btn {
-    width: 28px; height: 28px; border-radius: 8px;
+    width: 36px; height: 36px; border-radius: 9px;
     background: var(--glass); border: 1px solid var(--glass-border);
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 14px; transition: background .15s;
+    cursor: pointer; font-size: 18px;
+    transition: background .15s;
   }
   .settings-btn:hover { background: var(--glass-hover); }
 
-  /* ── SETTINGS PANEL ── */
+  /* ── SETTINGS PANEL (drawer) ── */
   .settings-overlay {
     display: none; position: fixed; inset: 0; background: rgba(100,130,180,0.25);
     backdrop-filter: blur(4px); z-index: 100;
@@ -99,7 +100,8 @@
   .settings-overlay.open { display: block; }
   .settings-panel {
     position: fixed; top: 0; right: 0; bottom: 0;
-    width: min(300px, 92vw);
+    width: min(380px, 92vw);
+    max-width: 100vw;
     background: rgba(240,248,255,0.96);
     backdrop-filter: blur(32px) saturate(200%);
     border-left: 1px solid rgba(255,255,255,0.9);
@@ -111,113 +113,77 @@
   }
   .settings-overlay.open .settings-panel { transform: translateX(0); }
   .settings-header {
-    padding: 12px 14px; border-bottom: 1px solid var(--border);
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
     display: flex; align-items: center; justify-content: space-between;
     position: sticky; top: 0; background: rgba(240,248,255,0.97);
     backdrop-filter: blur(16px); z-index: 2;
   }
-  .settings-header-title { font-size: 13px; font-weight: 700; color: #1e3a8a; }
+  .settings-header-title { font-size: 15px; font-weight: 700; color: #1e3a8a; }
   .settings-close {
-    width: 26px; height: 26px; border-radius: 50%;
+    width: 30px; height: 30px; border-radius: 50%;
     background: rgba(148,163,184,.2); border: 1px solid var(--border);
-    cursor: pointer; font-size: 12px;
+    cursor: pointer; font-size: 14px;
     display: flex; align-items: center; justify-content: center; color: var(--text-muted);
     transition: all .15s;
   }
   .settings-close:hover { background: rgba(220,38,38,.15); color: var(--red); }
-  .settings-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 12px; }
-  .gs-label { font-size: 9.5px; font-weight: 600; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .settings-body { padding: 14px 18px; display: flex; flex-direction: column; gap: 14px; }
+  .gs-label { font-size: 11px; font-weight: 600; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
   .mode-switcher { display: flex; gap: 4px; }
   .mode-btn {
-    flex: 1; padding: 6px 5px; border-radius: 8px; border: 1px solid var(--border);
-    background: rgba(255,255,255,.55); color: var(--text-muted); font-size: 10.5px; font-weight: 600;
+    flex: 1; padding: 8px 6px; border-radius: 9px; border: 1px solid var(--border);
+    background: rgba(255,255,255,.55); color: var(--text-muted); font-size: 12px; font-weight: 600;
     cursor: pointer; font-family: 'Kanit', sans-serif; transition: all .15s; text-align: center;
   }
   .mode-btn.active { background: rgba(219,234,254,.9); color: var(--blue); border-color: rgba(37,99,235,.4); }
   .gs-input {
-    width: 100%; margin-top: 4px; padding: 6px 9px; border-radius: 7px;
+    width: 100%; margin-top: 5px; padding: 8px 10px; border-radius: 8px;
     border: 1px solid rgba(37,99,235,.22); background: rgba(255,255,255,.8);
-    font-size: 11px; color: var(--text); font-family: 'Kanit','DM Mono',monospace;
+    font-size: 13px; color: var(--text); font-family: 'Kanit','DM Mono',monospace;
     outline: none; transition: border-color .15s;
   }
   .gs-input:focus { border-color: var(--blue); background: #fff; }
   .gs-input::placeholder { color: var(--text-dim); }
   .gs-btn {
-    width: 100%; margin-top: 6px; padding: 7px; border-radius: 8px;
+    width: 100%; margin-top: 7px; padding: 9px; border-radius: 9px;
     border: 1px solid rgba(37,99,235,.35); background: rgba(219,234,254,0.8);
-    color: #1e3a8a; font-size: 11px; font-weight: 600;
+    color: #1e3a8a; font-size: 13px; font-weight: 600;
     cursor: pointer; font-family: 'Kanit', sans-serif; transition: all .15s;
   }
   .gs-btn:hover { background: rgba(191,219,254,0.95); }
   .gs-btn:disabled { opacity: .4; cursor: not-allowed; }
-  .gs-status { font-size: 10px; margin-top: 4px; color: var(--text-dim); min-height: 13px; }
+  .gs-status { font-size: 11px; margin-top: 5px; color: var(--text-dim); min-height: 14px; }
   .file-picker-area {
-    width: 100%; border: 1.5px dashed rgba(37,99,235,.3); border-radius: 9px;
-    padding: 10px; text-align: center; cursor: pointer;
+    width: 100%; border: 1.5px dashed rgba(37,99,235,.3); border-radius: 10px;
+    padding: 14px; text-align: center; cursor: pointer;
     transition: border-color .15s, background .15s; position: relative;
     background: rgba(255,255,255,0.55);
   }
   .file-picker-area:hover { border-color: rgba(37,99,235,.7); background: rgba(219,234,254,.5); }
   .file-picker-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; }
-  .file-picker-icon { font-size: 20px; margin-bottom: 3px; }
-  .file-picker-text { font-size: 10.5px; color: var(--text-muted); }
+  .file-picker-icon { font-size: 24px; margin-bottom: 4px; }
+  .file-picker-text { font-size: 12px; color: var(--text-muted); }
   .ar-row { display: flex; align-items: center; justify-content: space-between; }
-  .ar-label { font-size: 10.5px; color: var(--text-dim); }
+  .ar-label { font-size: 12px; color: var(--text-dim); }
   .ar-select {
     background: rgba(255,255,255,.7); border: 1px solid var(--border);
-    border-radius: 6px; padding: 3px 7px; font-size: 10.5px; color: var(--text-muted);
+    border-radius: 7px; padding: 5px 8px; font-size: 12px; color: var(--text-muted);
     outline: none; cursor: pointer; font-family: 'Kanit', sans-serif;
   }
-  .ar-countdown { font-size: 9.5px; color: #2d7d72; margin-top: 3px; min-height: 13px; display: flex; align-items: center; gap: 4px; }
-  .ar-countdown .pulse { width: 5px; height: 5px; border-radius: 50%; background: #2d7d72; animation: pulse 1s ease-in-out infinite; flex-shrink: 0; }
+  .ar-countdown { font-size: 11px; color: #2d7d72; margin-top: 3px; min-height: 14px; display: flex; align-items: center; gap: 4px; }
+  .ar-countdown .pulse { width: 6px; height: 6px; border-radius: 50%; background: #2d7d72; animation: pulse 1s ease-in-out infinite; flex-shrink: 0; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
 
-  /* ── CONTENT AREA — 3-row grid ── */
-  .content {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: 6px;
-    padding: 6px 8px 6px;
+  /* ── MAIN — fixed height, no scroll ── */
+  .main {
+    position: relative; z-index: 1;
+    padding: 10px 16px;
+    display: flex; flex-direction: column; gap: 9px;
+    width: 1080px;
+    /* topbar=52px → remaining = 1868px */
+    height: calc(1920px - 52px);
     overflow: hidden;
-    min-height: 0;
-  }
-
-  /* ── ROW 1: STATS 4 col ── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-  .stat-card {
-    background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(20px) saturate(160%);
-    border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.82);
-    box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.95);
-    padding: 7px 10px 6px; position: relative; overflow: hidden;
-    min-width: 0;
-  }
-  .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--acc,var(--blue)); }
-  .stat-label { font-size: 8.5px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .3px; margin-bottom: 2px; line-height: 1.3; }
-  .stat-value { font-size: 22px; font-weight: 700; line-height: 1; }
-  .stat-sub { font-size: 8.5px; color: var(--text-dim); margin-top: 1px; }
-  .stat-icon { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 20px; opacity: .65; }
-
-  /* ── ROW 2: MIDDLE — bar chart + tomorrow card ── */
-  .mid-row {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: 6px;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  /* ── ROW 3: BOTTOM — donuts + table ── */
-  .bot-row {
-    display: grid;
-    grid-template-columns: repeat(3, 100px) 1fr;
-    gap: 6px;
-    min-height: 0;
-    overflow: hidden;
+    flex: 1;
   }
 
   /* ── GLASS CARD ── */
@@ -229,17 +195,31 @@
     box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.95);
     overflow: hidden;
     min-width: 0;
-    display: flex; flex-direction: column;
-    min-height: 0;
   }
   .card-header {
-    padding: 6px 10px 5px; border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between; gap: 6px;
-    flex-shrink: 0;
+    padding: 8px 14px 7px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
   }
-  .card-title { font-size: 11px; font-weight: 700; color: var(--text); }
-  .card-subtitle { font-size: 9px; color: var(--text-muted); margin-top: 1px; }
-  .card-body { padding: 8px 10px; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .card-title { font-size: 13px; font-weight: 700; color: var(--text); }
+  .card-subtitle { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+  .card-body { padding: 8px 14px; }
+
+  /* ── STAT CARDS — 4 col horizontal ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; flex-shrink: 0; }
+  .stat-card {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.82);
+    box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.95);
+    padding: 10px 12px 8px; position: relative; overflow: hidden;
+    min-width: 0;
+  }
+  .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2.5px; background:var(--acc,var(--blue)); }
+  .stat-label { font-size: 10px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 3px; line-height: 1.3; }
+  .stat-value { font-size: 30px; font-weight: 700; line-height: 1; }
+  .stat-sub { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+  .stat-icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 28px; opacity: .75; }
 
   /* ── SKELETON ── */
   @keyframes shimmer { 0%{background-position:-400px 0} 100%{background-position:400px 0} }
@@ -248,18 +228,48 @@
     background-size: 400px 100%; animation: shimmer 1.4s infinite linear; border-radius: 5px;
   }
 
+  /* ── MID ROW: bar chart + tomorrow ── */
+  .mid-row {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 9px;
+    flex-shrink: 0;
+  }
+
+  /* ── DONUTS ── */
+  .donuts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; flex-shrink: 0; }
+  .donut-mini-card {
+    background: rgba(255,255,255,0.52);
+    backdrop-filter: blur(18px);
+    border-radius: 10px; border: 1px solid rgba(255,255,255,0.82);
+    box-shadow: var(--shadow);
+    padding: 9px 8px 9px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    min-width: 0;
+  }
+  .donut-mini-label { font-size: 11px; font-weight: 600; color: #1e40af; text-align: center; line-height: 1.2; }
+  .donut-mini-wrap { position: relative; height: 76px; width: 76px; display: flex; align-items: center; justify-content: center; }
+  .donut-center { position: absolute; text-align: center; pointer-events: none; }
+  .donut-center .dc-val { font-size: 16px; font-weight: 700; color: rgba(15,23,42,0.85); line-height: 1; }
+  .donut-center .dc-label { font-size: 9px; color: var(--text-muted); }
+  .donut-stats { display: flex; flex-direction: column; gap: 2px; width: 100%; }
+  .donut-stat-item { display: flex; align-items: center; justify-content: space-between; }
+  .donut-stat-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
+  .donut-stat-lbl { font-size: 10px; color: var(--text-muted); flex: 1; margin: 0 4px; }
+  .donut-stat-val { font-size: 12px; font-weight: 700; }
+
   /* ── BAR CHART ── */
-  .chart-wrapper { position: relative; flex: 1; min-height: 0; }
+  .chart-wrapper { position: relative; height: 200px; }
   .no-data-overlay {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; color: var(--text-muted);
-    gap: 4px; font-size: 10px; pointer-events: none;
+    gap: 5px; font-size: 11px; pointer-events: none;
   }
-  .no-data-overlay .ndo-icon { font-size: 20px; opacity: .3; }
+  .no-data-overlay .ndo-icon { font-size: 24px; opacity: .3; }
   .no-data-overlay .ndo-text { font-weight: 600; opacity: .5; }
-  .legend-wrap { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 5px; flex-shrink: 0; }
-  .legend-item { display: flex; align-items: center; gap: 3px; font-size: 9px; color: var(--text-muted); }
-  .legend-dot { width: 7px; height: 7px; border-radius: 2px; }
+  .legend-wrap { display: flex; flex-wrap: wrap; gap: 5px 10px; margin-top: 6px; }
+  .legend-item { display: flex; align-items: center; gap: 4px; font-size: 10.5px; color: var(--text-muted); }
+  .legend-dot { width: 9px; height: 9px; border-radius: 2px; }
 
   /* ── TOMORROW CARD ── */
   .tomorrow-card {
@@ -267,79 +277,58 @@
     backdrop-filter: blur(22px);
     border: 1px solid rgba(255,255,255,0.9);
     border-radius: var(--radius);
-    box-shadow: 0 4px 18px rgba(37,99,235,0.10), inset 0 1px 0 rgba(255,255,255,0.9);
-    padding: 8px 10px;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.10), inset 0 1px 0 rgba(255,255,255,0.9);
+    padding: 10px 12px;
     color: #1e3a8a;
     min-width: 0;
-    display: flex; flex-direction: column;
-    min-height: 0; overflow: hidden;
+    overflow: hidden;
   }
-  .tom-header-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; gap: 4px; }
-  .tom-date-lbl { font-size: 8.5px; font-weight: 500; opacity: .6; text-transform: uppercase; letter-spacing: .6px; }
+  .tom-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; gap: 8px; }
+  .tom-date-lbl { font-size: 10px; font-weight: 500; opacity: .6; text-transform: uppercase; letter-spacing: .8px; }
   .tom-toggle-btn {
-    display: inline-flex; align-items: center; gap: 3px;
+    display: inline-flex; align-items: center; gap: 4px;
     background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8);
-    color: rgba(30,58,138,.9); border-radius: 6px; padding: 2px 6px;
-    font-size: 9px; font-weight: 600; cursor: pointer;
+    color: rgba(30,58,138,.9); border-radius: 8px; padding: 3px 8px;
+    font-size: 10px; font-weight: 600; cursor: pointer;
     font-family: 'Kanit', sans-serif; transition: all .15s; white-space: nowrap;
   }
-  .tom-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 6px; }
+  .tom-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 7px; }
   .tom-pill {
-    background: rgba(255,255,255,.6); border-radius: 8px; padding: 6px 8px;
+    background: rgba(255,255,255,.6); border-radius: 8px; padding: 8px 10px;
     border: 1px solid rgba(255,255,255,.85); cursor: pointer;
     transition: all .15s; backdrop-filter: blur(6px);
   }
-  .tom-pill:hover { background: rgba(255,255,255,.82); }
+  .tom-pill:hover { background: rgba(255,255,255,.82); transform: translateY(-1px); }
   .tom-pill.green { border-color: rgba(5,150,105,.3); }
   .tom-pill.red { border-color: rgba(220,38,38,.3); }
-  .pill-val { font-size: 20px; font-weight: 700; line-height: 1; }
+  .pill-val { font-size: 26px; font-weight: 700; line-height: 1; }
   .pill-val.green { color: #2d7d72; }
   .pill-val.red { color: var(--red); }
-  .pill-lbl { font-size: 9px; opacity: .65; margin-top: 1px; }
-  .tom-total-row { margin-bottom: 5px; }
-  .tom-total-num { font-size: 24px; font-weight: 700; line-height: 1; }
-  .tom-total-sub { font-size: 9px; opacity: .55; margin-top: 1px; }
-  .tom-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; flex: 1; min-height: 0; }
-  .tom-list-col { display: flex; flex-direction: column; gap: 2px; overflow-y: auto; }
+  .pill-lbl { font-size: 10px; opacity: .65; margin-top: 2px; }
+  .tom-total-row { margin-bottom: 6px; }
+  .tom-total-num { font-size: 30px; font-weight: 700; line-height: 1; }
+  .tom-total-sub { font-size: 10px; opacity: .55; margin-top: 1px; }
+
+  .tom-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .tom-list-col { display: flex; flex-direction: column; gap: 3px; max-height: 120px; overflow-y: auto; }
   .tom-item-row {
-    display: flex; align-items: center; gap: 4px; padding: 2px 5px;
-    border-radius: 5px; background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8);
+    display: flex; align-items: center; gap: 5px; padding: 3px 6px;
+    border-radius: 6px; background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8);
     min-width: 0;
   }
-  .tom-item-name { font-size: 9px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; }
+  .tom-item-name { font-size: 10px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; }
   .tom-cust-name {
-    font-size: 8.5px; font-weight: 600; color: #1e40af;
+    font-size: 9px; font-weight: 600; color: #1e40af;
     background: rgba(219,234,254,.7); border: 1px solid rgba(147,197,253,.5);
-    border-radius: 3px; padding: 0px 4px; flex-shrink: 0;
-    max-width: 50px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    border-radius: 4px; padding: 1px 4px; flex-shrink: 0;
+    max-width: 55px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .tom-hint { font-size: 9px; opacity: .35; text-align: center; margin-top: 4px; flex-shrink: 0; }
-
-  /* ── DONUTS ── */
-  .donut-mini-card {
-    background: rgba(255,255,255,0.52);
-    backdrop-filter: blur(18px);
-    border-radius: 10px; border: 1px solid rgba(255,255,255,0.82);
-    box-shadow: var(--shadow);
-    padding: 6px 6px 5px;
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-    min-width: 0; overflow: hidden;
-  }
-  .donut-mini-label { font-size: 8.5px; font-weight: 600; color: #1e40af; text-align: center; line-height: 1.2; white-space: pre-line; }
-  .donut-mini-wrap { position: relative; height: 58px; width: 58px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .donut-center { position: absolute; text-align: center; pointer-events: none; }
-  .donut-center .dc-val { font-size: 13px; font-weight: 700; color: rgba(15,23,42,0.85); line-height: 1; }
-  .donut-center .dc-label { font-size: 7.5px; color: var(--text-muted); }
-  .donut-stats { display: flex; flex-direction: column; gap: 2px; width: 100%; }
-  .donut-stat-item { display: flex; align-items: center; justify-content: space-between; }
-  .donut-stat-dot { width: 6px; height: 6px; border-radius: 1.5px; flex-shrink: 0; }
-  .donut-stat-lbl { font-size: 8px; color: var(--text-muted); flex: 1; margin: 0 3px; }
-  .donut-stat-val { font-size: 9.5px; font-weight: 700; }
+  .tom-hint { font-size: 9.5px; opacity: .35; text-align: center; margin-top: 6px; }
 
   /* ── NOT READY TABLE ── */
-  .filter-row { display: flex; gap: 3px; flex-wrap: wrap; }
+  .filter-row { display: flex; gap: 5px; flex-wrap: wrap; }
   .filter-btn {
-    padding: 2px 8px; border-radius: 6px; font-size: 9.5px; font-weight: 500; cursor: pointer;
+    padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 500; cursor: pointer;
     border: 1px solid var(--border); background: rgba(255,255,255,.6);
     color: var(--text-muted); transition: all .15s; font-family: 'Kanit', sans-serif;
   }
@@ -349,105 +338,136 @@
   .table-scroll {
     overflow-x: auto;
     overflow-y: auto;
-    flex: 1;
-    min-height: 0;
+    max-height: 260px;
+    contain: inline-size;
   }
-  .data-table { width: 100%; border-collapse: collapse; font-size: 10.5px; min-width: 400px; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 11.5px; min-width: 420px; }
   .data-table th {
-    padding: 5px 7px; text-align: left; font-size: 8.5px; font-weight: 600;
-    color: var(--text-dim); text-transform: uppercase; letter-spacing: .3px;
+    padding: 6px 10px; text-align: left; font-size: 10px; font-weight: 600;
+    color: var(--text-dim); text-transform: uppercase; letter-spacing: .4px;
     border-bottom: 1px solid var(--border);
     background: rgba(225,238,252,0.97);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
     white-space: nowrap; position: sticky; top: 0; z-index: 1;
-    box-shadow: 0 1px 0 rgba(160,200,255,0.3);
+    box-shadow: 0 1px 0 rgba(160,200,255,0.4);
   }
-  .data-table td { padding: 5px 7px; border-bottom: 1px solid rgba(148,163,184,.10); color: var(--text); }
+  .data-table td { padding: 6px 10px; border-bottom: 1px solid rgba(148,163,184,.12); color: var(--text); }
   .data-table tr:last-child td { border-bottom: none; }
-  .data-table tr:hover td { background: rgba(219,234,254,.20); }
+  .data-table tr:hover td { background: rgba(219,234,254,.25); }
 
-  /* ── CUSTOMER CHIP ── */
+  /* ── CUSTOMER CELL ── */
+  .cust-cell {
+    font-size: 10px; font-weight: 600; color: #1e40af;
+    max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    display: block;
+  }
   .cust-chip {
     display: inline-block;
     background: rgba(219,234,254,.75); border: 1px solid rgba(147,197,253,.6);
-    border-radius: 4px; padding: 0px 5px;
-    font-size: 9px; font-weight: 600; color: #1e40af;
-    max-width: 72px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    border-radius: 5px; padding: 1px 6px;
+    font-size: 9.5px; font-weight: 600; color: #1e40af;
+    max-width: 78px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     vertical-align: middle;
   }
 
   /* ── BADGES ── */
-  .badge { display: inline-flex; align-items: center; padding: 1px 6px; border-radius: 20px; font-size: 9.5px; font-weight: 600; }
+  .badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 20px; font-size: 10.5px; font-weight: 600; }
   .badge-red   { background: rgba(220,38,38,.1); color: var(--red); border: 1px solid rgba(220,38,38,.2); }
   .badge-green { background: rgba(5,150,105,.1); color: var(--green); border: 1px solid rgba(5,150,105,.2); }
   .badge-amber { background: rgba(217,119,6,.1); color: var(--amber); border: 1px solid rgba(217,119,6,.2); }
   .badge-blue  { background: rgba(37,99,235,.1); color: var(--blue); border: 1px solid rgba(37,99,235,.2); }
   .badge-sent  { background: rgba(74,160,222,.15); color: #165aa3; border: 1px solid rgba(74,170,222,.4); }
 
-  .shortage-bar { height: 3px; background: rgba(248,113,113,.2); border-radius: 3px; overflow: hidden; margin-top: 1px; }
+  .shortage-bar { height: 3px; background: rgba(248,113,113,.2); border-radius: 3px; overflow: hidden; margin-top: 2px; }
   .shortage-fill { height: 100%; background: var(--red); border-radius: 3px; }
 
-  .inv-id { font-family: 'DM Mono', monospace; font-size: 9.5px; color: var(--blue); font-weight: 600; }
+  .inv-id { font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--blue); font-weight: 600; }
 
-  /* ── MODAL ── */
+  /* ── MODAL — กลางจอ ── */
   .modal-overlay {
-    display: none; position: fixed; inset: 0;
+    display: none;
+    position: fixed;
+    inset: 0;
     background: rgba(10,20,60,0.40);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 200;
-    align-items: center; justify-content: center;
-    padding: 14px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
   }
   .modal-overlay.open { display: flex; }
+
   .modal {
     background: rgba(245,251,255,0.97);
     backdrop-filter: blur(36px) saturate(200%);
+    -webkit-backdrop-filter: blur(36px) saturate(200%);
     border: 1px solid rgba(255,255,255,0.95);
-    border-radius: 16px;
-    width: 100%; max-width: 580px; max-height: 82vh;
-    overflow: hidden; display: flex; flex-direction: column;
-    box-shadow: 0 20px 70px rgba(30,58,138,0.26), inset 0 1px 0 rgba(255,255,255,0.9);
-    animation: popIn .24s cubic-bezier(.34,1.56,.64,1);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 85vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+      0 24px 80px rgba(30,58,138,0.28),
+      0 8px 24px rgba(30,58,138,0.16),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    animation: popIn .26s cubic-bezier(.34,1.56,.64,1);
   }
-  @keyframes popIn { from{transform:scale(0.92);opacity:0} to{transform:scale(1);opacity:1} }
+
+  @keyframes popIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+
   .modal-handle { display: none; }
+
   .modal-header {
-    padding: 11px 16px; border-bottom: 1px solid var(--border);
+    padding: 14px 18px 13px;
+    border-bottom: 1px solid var(--border);
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    background: rgba(240,248,255,0.95); flex-shrink: 0;
+    background: rgba(240,248,255,0.95);
+    flex-shrink: 0;
   }
-  .modal-title { font-size: 13px; font-weight: 700; color: #1e3a8a; }
+  .modal-title { font-size: 15px; font-weight: 700; color: #1e3a8a; }
   .modal-close {
     background: rgba(148,163,184,.2); border: 1px solid var(--border);
-    cursor: pointer; width: 26px; height: 26px; border-radius: 50%; font-size: 12px;
+    cursor: pointer; width: 30px; height: 30px; border-radius: 50%; font-size: 14px;
     display: flex; align-items: center; justify-content: center; color: var(--text-muted);
     transition: all .15s; flex-shrink: 0;
   }
   .modal-close:hover { background: rgba(220,38,38,.15); color: var(--red); }
-  .modal-body { padding: 10px 12px; overflow-y: auto; flex: 1; }
-  .modal-tabs { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
+  .modal-body { padding: 12px 14px; overflow-y: auto; flex: 1; }
+  .modal-tabs { display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
   .modal-tab {
-    padding: 4px 9px; border-radius: 7px; font-size: 10px; font-weight: 500; cursor: pointer;
+    padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 500; cursor: pointer;
     border: 1px solid var(--border); background: rgba(255,255,255,.6);
     color: var(--text-muted); transition: all .15s; font-family: 'Kanit', sans-serif;
   }
   .modal-tab.active { background: rgba(219,234,254,.85); color: var(--blue); border-color: rgba(37,99,235,.4); }
 
-  ::-webkit-scrollbar { width: 3px; height: 3px; }
-  ::-webkit-scrollbar-track { background: rgba(148,163,184,.06); }
-  ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.32); border-radius: 3px; }
+  /* ── LAST UPDATED + SECTION DIVIDERS ── */
+  .section-divider { display: flex; align-items: center; gap: 8px; padding: 2px 0; }
+  .divider-label { font-size: 10px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: .8px; white-space: nowrap; }
+  .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(147,197,253,.4), transparent); }
 
-  @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
-  .stat-card, .card, .tomorrow-card, .donut-mini-card { animation: fadeIn .28s ease both; }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: rgba(148,163,184,.08); }
+  ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.35); border-radius: 3px; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .stat-card, .card, .tomorrow-card, .donut-mini-card { animation: fadeIn .3s ease both; }
 </style>
 </head>
 <body>
-<div class="shell">
 
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="topbar-left">
-    <img src="Logo.webp" alt="logo" style="height:28px;width:auto;object-fit:contain;border-radius:6px"
+    <img src="Logo.webp" alt="logo" style="height:34px;width:auto;object-fit:contain;border-radius:7px"
        onerror="this.outerHTML='<div class=\'topbar-logo\'>📦</div>'">
     <div>
       <div class="topbar-title">SAHA Delivery</div>
@@ -455,9 +475,9 @@
     </div>
   </div>
   <div class="topbar-right">
-    <div style="text-align:right">
-      <div style="font-size:8.5px;color:var(--text-muted)">อัปเดต</div>
-      <div id="lastUpdatedBadge" style="font-size:9.5px;font-weight:600;color:var(--text)">—</div>
+    <div>
+      <div style="font-size:10px;color:var(--text-muted);text-align:right">อัปเดต</div>
+      <div id="lastUpdatedBadge" style="font-size:11px;font-weight:600;color:var(--text)">—</div>
     </div>
     <span class="today-badge" id="todayBadge">📅 —</span>
     <div class="settings-btn" onclick="openSettings()" title="ตั้งค่า">⚙️</div>
@@ -472,13 +492,15 @@
       <div class="settings-close" onclick="closeSettings()">✕</div>
     </div>
     <div class="settings-body">
+
       <div>
         <div class="gs-label">โหมดการใช้งาน</div>
         <div class="mode-switcher" id="modeSwitcher">
-          <button class="mode-btn active" id="modeXBtn" onclick="setMode('X')">🖥 เครื่อง X<br><span style="font-size:8.5px;opacity:.6">มีไฟล์</span></button>
-          <button class="mode-btn" id="modeYBtn" onclick="setMode('Y')">📺 เครื่อง Y<br><span style="font-size:8.5px;opacity:.6">แสดงผล</span></button>
+          <button class="mode-btn active" id="modeXBtn" onclick="setMode('X')">🖥 เครื่อง X<br><span style="font-size:9px;opacity:.6">มีไฟล์</span></button>
+          <button class="mode-btn" id="modeYBtn" onclick="setMode('Y')">📺 เครื่อง Y<br><span style="font-size:9px;opacity:.6">แสดงผล</span></button>
         </div>
       </div>
+
       <div>
         <div class="gs-label">🔗 GitHub Gist Config</div>
         <input class="gs-input" id="gistId" placeholder="Gist ID">
@@ -486,6 +508,8 @@
         <button class="gs-btn" onclick="saveGistConfig()">💾 บันทึก Config</button>
         <div class="gs-status" id="cfgStatus"></div>
       </div>
+
+      <!-- เครื่อง X panel -->
       <div id="panelX">
         <div class="gs-label">📂 แหล่งข้อมูล (Excel)</div>
         <div class="file-picker-area" id="filePickerArea" title="คลิกเลือกไฟล์">
@@ -493,10 +517,10 @@
           <div class="file-picker-icon">📁</div>
           <div class="file-picker-text">คลิกหรือลากไฟล์มาวาง<br>.xlsx / .xls / .xlsm</div>
         </div>
-        <div id="srcFile" style="font-size:9.5px;color:var(--text-muted);margin-top:4px;word-break:break-all">—</div>
+        <div id="srcFile" style="font-size:11px;color:var(--text-muted);margin-top:5px;word-break:break-all">—</div>
         <button class="gs-btn" id="gsBtn" onclick="fetchData()">🔄 โหลดข้อมูลใหม่</button>
         <div class="gs-status" id="gsStatus">📂 กรุณาเลือกไฟล์ Excel</div>
-        <div class="ar-row" style="margin-top:8px">
+        <div class="ar-row" style="margin-top:10px">
           <span class="ar-label">⏱ Auto-refresh</span>
           <select class="ar-select" id="arSelect" onchange="setAutoRefresh(this.value)">
             <option value="0">ปิด</option>
@@ -508,10 +532,12 @@
         </div>
         <div class="ar-countdown" id="arCountdown"></div>
       </div>
+
+      <!-- เครื่อง Y panel -->
       <div id="panelY" style="display:none">
         <div class="gs-label">📺 โหมดแสดงผล</div>
-        <div class="gs-status" id="yStatus" style="min-height:13px">⏳ รอรับข้อมูล...</div>
-        <div class="ar-row" style="margin-top:7px">
+        <div class="gs-status" id="yStatus" style="min-height:14px">⏳ รอรับข้อมูล...</div>
+        <div class="ar-row" style="margin-top:8px">
           <span class="ar-label">⏱ Sync ทุก</span>
           <select class="ar-select" id="ySyncSelect" onchange="setYSync(this.value)">
             <option value="15">15 วินาที</option>
@@ -520,47 +546,48 @@
             <option value="300">5 นาที</option>
           </select>
         </div>
-        <div class="ar-countdown" id="ySyncCountdown" style="margin-top:3px"></div>
+        <div class="ar-countdown" id="ySyncCountdown" style="margin-top:4px"></div>
       </div>
+
     </div>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="content">
+<!-- MAIN CONTENT -->
+<main class="main">
 
-  <!-- ROW 1: STATS -->
+  <!-- STATS 4 col -->
   <div class="stats-grid">
     <div class="stat-card" style="--acc:#60a5fa">
       <div class="stat-label">ยอดส่งวันนี้ทั้งหมด</div>
-      <div class="stat-value" id="stat-total"><span class="skeleton" style="display:inline-block;height:22px;width:36px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-total"><span class="skeleton" style="display:inline-block;height:26px;width:44px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">รายการ</div>
       <div class="stat-icon">📦</div>
     </div>
     <div class="stat-card" style="--acc:#34d399">
       <div class="stat-label">พร้อมส่ง วันนี้</div>
-      <div class="stat-value" id="stat-ready" style="color:var(--green)"><span class="skeleton" style="display:inline-block;height:22px;width:36px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-ready" style="color:var(--green)"><span class="skeleton" style="display:inline-block;height:26px;width:44px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">รายการ</div>
       <div class="stat-icon">✅</div>
     </div>
     <div class="stat-card" style="--acc:#f87171">
       <div class="stat-label">ยังไม่พร้อม วันนี้</div>
-      <div class="stat-value" id="stat-notready" style="color:var(--red)"><span class="skeleton" style="display:inline-block;height:22px;width:36px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-notready" style="color:var(--red)"><span class="skeleton" style="display:inline-block;height:26px;width:44px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">รายการ</div>
       <div class="stat-icon">⚠️</div>
     </div>
     <div class="stat-card" style="--acc:#fbbf24">
       <div class="stat-label">ความพร้อม % วันนี้</div>
-      <div class="stat-value" id="stat-pct" style="color:var(--amber)"><span class="skeleton" style="display:inline-block;height:22px;width:36px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-pct" style="color:var(--amber)"><span class="skeleton" style="display:inline-block;height:26px;width:44px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">พร้อมส่ง</div>
       <div class="stat-icon">📊</div>
     </div>
   </div>
 
-  <!-- ROW 2: BAR + TOMORROW -->
+  <!-- MID ROW: bar chart | tomorrow -->
   <div class="mid-row">
 
-    <!-- Bar Chart -->
+    <!-- BAR CHART -->
     <div class="card">
       <div class="card-header">
         <div>
@@ -576,7 +603,7 @@
             <div class="ndo-text">รอโหลดข้อมูล...</div>
           </div>
         </div>
-        <div class="legend-wrap">
+        <div class="legend-wrap" style="margin-top:8px">
           <div class="legend-item"><div class="legend-dot" style="background:#22A652"></div>พร้อมส่ง</div>
           <div class="legend-item"><div class="legend-dot" style="background:#E05C63"></div>ไม่พร้อมส่ง</div>
           <div class="legend-item"><div class="legend-dot" style="background:rgba(208,129,141,0.75);border:1px solid #D0818D"></div>ค้างส่ง</div>
@@ -586,7 +613,7 @@
       </div>
     </div>
 
-    <!-- Tomorrow Card -->
+    <!-- TOMORROW CARD -->
     <div class="tomorrow-card" id="tomorrowCard">
       <div class="tom-header-row">
         <div>
@@ -606,22 +633,21 @@
         </div>
         <div class="tom-pill red" id="tomNotReadyPill">
           <div class="pill-val red" id="tom-notready">—</div>
-          <div class="pill-lbl">❌ ไม่พร้อม</div>
+          <div class="pill-lbl">❌ ไม่พร้อมส่ง</div>
         </div>
       </div>
       <div class="tom-lists">
         <div id="tomReadyList" class="tom-list-col"></div>
         <div id="tomNotReadyList" class="tom-list-col"></div>
       </div>
-      <div class="tom-hint">แตะเพื่อดูรายละเอียด</div>
+      <div class="tom-hint">แตะที่การ์ดเพื่อดูรายละเอียด</div>
     </div>
 
-  </div><!-- /mid-row -->
+  </div>
 
-  <!-- ROW 3: DONUTS + TABLE -->
-  <div class="bot-row">
-
-    <!-- Donut Yesterday -->
+  <!-- DONUTS 3 col -->
+  <div class="donuts-row">
+    <!-- Yesterday -->
     <div class="donut-mini-card">
       <div class="donut-mini-label" id="ydTitle">เมื่อวาน</div>
       <div class="donut-mini-wrap">
@@ -641,8 +667,7 @@
         </div>
       </div>
     </div>
-
-    <!-- Donut Today -->
+    <!-- Today -->
     <div class="donut-mini-card">
       <div class="donut-mini-label" id="tdTitle">วันนี้ ✨</div>
       <div class="donut-mini-wrap">
@@ -667,8 +692,7 @@
         </div>
       </div>
     </div>
-
-    <!-- Donut Tomorrow -->
+    <!-- Tomorrow -->
     <div class="donut-mini-card">
       <div class="donut-mini-label" id="tmTitle">พรุ่งนี้</div>
       <div class="donut-mini-wrap">
@@ -693,60 +717,59 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Not Ready Table -->
-    <div class="card">
-      <div class="card-header" style="flex-wrap:wrap;gap:5px">
-        <div>
-          <div class="card-title">รายการที่ยังไม่พร้อมส่ง</div>
-          <div class="card-subtitle">เรียงตามยอดขาดน้อย→มาก</div>
-        </div>
-        <div class="filter-row">
-          <button class="filter-btn active" onclick="filterTable('all')" id="btn-all">ทั้งหมด</button>
-          <button class="filter-btn" onclick="filterTable('yd')" id="btn-yd">เมื่อวาน</button>
-          <button class="filter-btn" onclick="filterTable('td')" id="btn-td">วันนี้</button>
-          <button class="filter-btn" onclick="filterTable('tm')" id="btn-tm">พรุ่งนี้</button>
-        </div>
+  <!-- NOT READY TABLE -->
+  <div class="card" style="flex: 1; min-height: 0; display: flex; flex-direction: column;">
+    <div class="card-header" style="flex-wrap:wrap;gap:8px;flex-shrink:0">
+      <div>
+        <div class="card-title">รายการที่ยังไม่พร้อมส่ง</div>
+        <div class="card-subtitle">เรียงตามยอดขาดน้อย→มาก</div>
       </div>
-      <div class="table-scroll">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th style="width:24px">#</th>
-              <th style="width:68px">ลูกค้า</th>
-              <th style="width:96px">Inventory ID</th>
-              <th style="width:58px">วันที่</th>
-              <th style="width:44px">Due</th>
-              <th style="width:44px">Stock</th>
-              <th style="width:80px">ขาด ▲</th>
-              <th style="width:66px">สถานะ</th>
-            </tr>
-          </thead>
-          <tbody id="notReadyBody">
-            <tr><td colspan="8" style="text-align:center;padding:16px;color:var(--text-muted)">รอโหลดข้อมูล...</td></tr>
-          </tbody>
-        </table>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterTable('all')" id="btn-all">ทั้งหมด</button>
+        <button class="filter-btn" onclick="filterTable('yd')" id="btn-yd">เมื่อวาน</button>
+        <button class="filter-btn" onclick="filterTable('td')" id="btn-td">วันนี้</button>
+        <button class="filter-btn" onclick="filterTable('tm')" id="btn-tm">พรุ่งนี้</button>
       </div>
     </div>
+    <div class="table-scroll" style="flex:1;max-height:none">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width:28px">#</th>
+            <th style="width:76px">ลูกค้า</th>
+            <th style="width:106px">Inventory ID</th>
+            <th style="width:66px">วันที่</th>
+            <th style="width:50px">Due</th>
+            <th style="width:50px">Stock</th>
+            <th style="width:86px">ขาด ▲</th>
+            <th style="width:70px">สถานะ</th>
+          </tr>
+        </thead>
+        <tbody id="notReadyBody">
+          <tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted)">รอโหลดข้อมูล...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-  </div><!-- /bot-row -->
+</main>
 
-</div><!-- /content -->
-</div><!-- /shell -->
-
-<!-- MODAL -->
+<!-- MODAL — กลางจอ -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
     <div class="modal-header">
       <div>
         <div class="modal-title" id="modalTitle">รายละเอียด</div>
-        <div id="modalSubtitle" style="font-size:9.5px;color:var(--text-muted);margin-top:1px"></div>
+        <div id="modalSubtitle" style="font-size:11px;color:var(--text-muted);margin-top:1px"></div>
       </div>
       <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
     </div>
     <div class="modal-body">
       <div class="modal-tabs" id="modalTabs"></div>
-      <div class="table-scroll" style="max-height:calc(82vh - 140px)">
+      <div class="table-scroll" style="max-height:calc(85vh - 160px)">
         <table class="data-table">
           <thead id="modalThead"></thead>
           <tbody id="modalBody"></tbody>
@@ -767,6 +790,7 @@ let _savedBytes = null;
 
 const TODAY = new Date().toISOString().slice(0,10);
 
+// ─── DATE HELPERS ───
 function nextWorkday(d) { const dt=new Date(d); dt.setDate(dt.getDate()+1); while(dt.getDay()===0) dt.setDate(dt.getDate()+1); return dt.toISOString().slice(0,10); }
 function prevWorkday(d) { const dt=new Date(d); dt.setDate(dt.getDate()-1); while(dt.getDay()===0) dt.setDate(dt.getDate()-1); return dt.toISOString().slice(0,10); }
 
@@ -788,20 +812,23 @@ function deriveMonthLabel(data) {
   return `${THAI_MONTHS_SHORT[parseInt(month)]} ${parseInt(year)+543}`;
 }
 
+// ─── CUSTOMER CHIP HELPER ───
 function custChip(c) {
-  if(!c) return '<span style="color:var(--text-dim);font-size:9px">—</span>';
-  return `<span class="cust-chip" title="${c}">${c}</span>`;
+  if(!c) return '<span style="color:var(--text-dim);font-size:10px">—</span>';
+  return `<span style="font-size:11px;color:var(--text)" title="${c}">${c}</span>`;
 }
 
+// ─── SETTINGS PANEL ───
 function openSettings() { document.getElementById('settingsOverlay').classList.add('open'); }
 function closeSettings() { document.getElementById('settingsOverlay').classList.remove('open'); }
 function closeSettingsIfBg(e) { if(e.target===document.getElementById('settingsOverlay')) closeSettings(); }
 
+// ─── TOMORROW TOGGLE ───
 function toggleTomView(e) {
   e.stopPropagation();
   _tomViewMode = _tomViewMode==='name' ? 'inv' : 'name';
   document.getElementById('tomToggleIcon').textContent  = _tomViewMode==='name' ? '🔖' : '🆔';
-  document.getElementById('tomToggleLabel').textContent = _tomViewMode==='name' ? 'Inv ID' : 'ชื่อ';
+  document.getElementById('tomToggleLabel').textContent = _tomViewMode==='name' ? 'Inv ID' : 'ชื่อรายการ';
   renderTomLists();
 }
 function renderTomLists() {
@@ -815,11 +842,12 @@ function renderTomLists() {
     </div>`;
   };
   document.getElementById('tomReadyList').innerHTML =
-    (tmData.ready||[]).length ? (tmData.ready||[]).map(r=>renderItem(r,'#2d7d72')).join('') : `<div style="font-size:9px;color:rgba(30,58,138,.7);padding:3px 0">ไม่มีรายการ</div>`;
+    (tmData.ready||[]).length ? (tmData.ready||[]).map(r=>renderItem(r,'#2d7d72')).join('') : `<div style="font-size:10px;color:rgba(30,58,138,.7);padding:4px 0">ไม่มีรายการ</div>`;
   document.getElementById('tomNotReadyList').innerHTML =
-    (tmData.not_ready||[]).length ? (tmData.not_ready||[]).map(r=>renderItem(r,'#f87171')).join('') : `<div style="font-size:9px;color:rgba(30,58,138,.7);padding:3px 0">ไม่มีรายการ</div>`;
+    (tmData.not_ready||[]).length ? (tmData.not_ready||[]).map(r=>renderItem(r,'#f87171')).join('') : `<div style="font-size:10px;color:rgba(30,58,138,.7);padding:4px 0">ไม่มีรายการ</div>`;
 }
 
+// ─── CHARTS ───
 let barChartInst = null;
 let donutInsts   = [null,null,null];
 
@@ -939,8 +967,8 @@ function initBarChart() {
     id:'pctLabel',
     afterDatasetsDraw(chart){
       const{ctx,scales:{x,y},chartArea}=chart;
-      const numDates=Math.max(allDates.length,1);
-      const barW=chartArea.width/numDates;
+      const numDates = Math.max(allDates.length, 1);
+      const barW = chartArea.width / numDates;
       ctx.save();
       allDates.forEach((d,i)=>{
         const day=DATA[d]||{r:0,n:0};
@@ -948,12 +976,13 @@ function initBarChart() {
         if(!rn) return;
         const pct=Math.round((day.r||0)/rn*100);
         const total=rn+(day.ov||0)+(day.l||0)+(day.sent||0);
-        const fs=Math.max(5,Math.min(7.5,barW*0.28));
+        const fs = Math.max(5, Math.min(8, barW * 0.28));
         ctx.font=`600 ${fs}px Kanit,sans-serif`;
         ctx.fillStyle=pct>=80?'#1a6644':pct>=50?'#92400e':'#9b1c1c';
-        ctx.textAlign='center'; ctx.textBaseline='bottom';
-        const gap=barW<20?1:2;
-        ctx.fillText(pct+'%',x.getPixelForValue(i),y.getPixelForValue(total)-gap);
+        ctx.textAlign='center';
+        ctx.textBaseline='bottom';
+        const gap = barW < 20 ? 1 : 3;
+        ctx.fillText(pct+'%', x.getPixelForValue(i), y.getPixelForValue(total)-gap);
       });
       ctx.restore();
     }
@@ -963,15 +992,15 @@ function initBarChart() {
   return new Chart(ctx,{
     type:'bar',plugins:[pctPlugin],
     data:{labels,datasets:[
-      {label:'พร้อมส่ง',    data:allDates.map(d=>DATA[d]?.r||0),    backgroundColor:allDates.map((d,i)=>i===todayIdx?'#178a40':'#22A652'),borderRadius:2,borderSkipped:false},
-      {label:'ไม่พร้อมส่ง', data:allDates.map(d=>DATA[d]?.n||0),    backgroundColor:allDates.map((d,i)=>i===todayIdx?'#b83a40':'#E05C63'),borderRadius:2,borderSkipped:false},
-      {label:'ค้างส่ง',     data:allDates.map(d=>DATA[d]?.ov||0),   backgroundColor:'rgba(208,129,141,.65)',borderColor:'#D0818D',borderWidth:1,borderRadius:2,borderSkipped:false},
-      {label:'ส่งล่าช้า',   data:allDates.map(d=>DATA[d]?.l||0),    backgroundColor:'rgba(231,181,49,.45)',borderColor:'#E7B531',borderWidth:1,borderRadius:2,borderSkipped:false},
-      {label:'ส่งแล้ว',     data:allDates.map(d=>DATA[d]?.sent||0), backgroundColor:'rgba(78,134,222,.55)',borderColor:'#4E86DE',borderWidth:1,borderRadius:2,borderSkipped:false}
+      {label:'พร้อมส่ง',    data:allDates.map(d=>DATA[d]?.r||0),    backgroundColor:allDates.map((d,i)=>i===todayIdx?'#178a40':'#22A652'),borderRadius:3,borderSkipped:false},
+      {label:'ไม่พร้อมส่ง', data:allDates.map(d=>DATA[d]?.n||0),    backgroundColor:allDates.map((d,i)=>i===todayIdx?'#b83a40':'#E05C63'),borderRadius:3,borderSkipped:false},
+      {label:'ค้างส่ง',     data:allDates.map(d=>DATA[d]?.ov||0),   backgroundColor:'rgba(208,129,141,.65)',borderColor:'#D0818D',borderWidth:1.5,borderRadius:3,borderSkipped:false},
+      {label:'ส่งล่าช้า',   data:allDates.map(d=>DATA[d]?.l||0),    backgroundColor:'rgba(231,181,49,.45)',borderColor:'#E7B531',borderWidth:1.5,borderRadius:3,borderSkipped:false},
+      {label:'ส่งแล้ว',     data:allDates.map(d=>DATA[d]?.sent||0), backgroundColor:'rgba(78,134,222,.55)',borderColor:'#4E86DE',borderWidth:1.5,borderRadius:3,borderSkipped:false}
     ]},
     options:{
       responsive:true,maintainAspectRatio:false,
-      layout:{padding:{top:12}},
+      layout:{padding:{top:14}},
       plugins:{
         legend:{display:false},
         tooltip:{callbacks:{
@@ -990,8 +1019,8 @@ function initBarChart() {
         }}
       },
       scales:{
-        x:{stacked:true,grid:{display:false},ticks:{font:{size:8.5,family:'Kanit'},color:'rgba(30,58,138,.8)'}},
-        y:{stacked:true,grid:{color:'rgba(255,255,255,.06)'},ticks:{font:{size:8.5,family:'Kanit'},color:'rgba(30,58,138,.8)'},beginAtZero:true}
+        x:{stacked:true,grid:{display:false},ticks:{font:{size:9.5,family:'Kanit'},color:'rgba(30,58,138,.8)'}},
+        y:{stacked:true,grid:{color:'rgba(255,255,255,.06)'},ticks:{font:{size:9.5,family:'Kanit'},color:'rgba(30,58,138,.8)'},beginAtZero:true}
       },
       onClick:(evt,els)=>{if(els.length)openDayModal(allDates[els[0].index],'all');},
       onHover:(evt,els)=>{evt.native.target.style.cursor=els.length?'pointer':'default';}
@@ -1052,13 +1081,13 @@ function renderModalTable(tab) {
     thead.innerHTML=`<tr><th>#</th><th>ลูกค้า</th><th>Inv ID</th><th>Due</th><th>Stock</th><th>ขาด/ส่ง</th><th>สถานะ</th></tr>`;
     tbody.innerHTML=rows.map((r,i)=>{
       let extra='';
-      if(r._type==='ready') extra=`<span class="badge badge-green" style="font-size:9px">Stock พอ</span>`;
-      else if(r._type==='not_ready'){const sh=r.sh||0;extra=sh>0?`<div style="font-weight:700;color:var(--red);font-size:11px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:100%"></div></div>`:`<span class="badge badge-green" style="font-size:9px">Stock พอ</span>`;}
-      else if(r._type==='overdue') extra=`<div style="font-weight:700;color:var(--red);font-size:10px">BPO: ${fmt(r.balPO)}</div>`;
-      else if(r._type==='late')    extra=`<div style="font-weight:700;color:var(--green);font-size:10px">+${fmt(r.shipped)}</div>`;
-      else if(r._type==='sent')    extra=`<div style="font-weight:700;color:#4E86DE;font-size:10px">${fmt(r.shipped)}</div>`;
+      if(r._type==='ready') extra=`<span class="badge badge-green" style="font-size:9.5px">Stock พอ</span>`;
+      else if(r._type==='not_ready'){const sh=r.sh||0;extra=sh>0?`<div style="font-weight:700;color:var(--red);font-size:12px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:100%"></div></div>`:`<span class="badge badge-green" style="font-size:9.5px">Stock พอ</span>`;}
+      else if(r._type==='overdue') extra=`<div style="font-weight:700;color:var(--red);font-size:11px">BPO: ${fmt(r.balPO)}</div>`;
+      else if(r._type==='late')    extra=`<div style="font-weight:700;color:var(--green);font-size:11px">+${fmt(r.shipped)}</div>`;
+      else if(r._type==='sent')    extra=`<div style="font-weight:700;color:#4E86DE;font-size:11px">${fmt(r.shipped)}</div>`;
       return `<tr>
-        <td style="color:var(--text-muted);font-size:9.5px">${i+1}</td>
+        <td style="color:var(--text-muted);font-size:10px">${i+1}</td>
         <td>${custChip(r.c)}</td>
         <td class="inv-id" title="${r.d||''}">${r.inv||'—'}</td>
         <td style="font-weight:600">${fmt(r.due)}</td>
@@ -1066,7 +1095,7 @@ function renderModalTable(tab) {
         <td>${extra}</td>
         <td>${statusBadge(r._type)}</td>
       </tr>`;
-    }).join('')||`<tr><td colspan="7" style="text-align:center;padding:16px;color:var(--text-muted)">ไม่มีรายการ</td></tr>`;
+    }).join('')||`<tr><td colspan="7" style="text-align:center;padding:18px;color:var(--text-muted)">ไม่มีรายการ</td></tr>`;
     return;
   }
 
@@ -1074,13 +1103,13 @@ function renderModalTable(tab) {
     const rows=d.sent_list||[];
     thead.innerHTML=`<tr><th>#</th><th>ลูกค้า</th><th>Inv ID</th><th>Due</th><th>Shipment</th><th>สถานะ</th></tr>`;
     tbody.innerHTML=rows.map((r,i)=>`<tr>
-      <td style="color:var(--text-muted);font-size:9.5px">${i+1}</td>
+      <td style="color:var(--text-muted);font-size:10px">${i+1}</td>
       <td>${custChip(r.c)}</td>
       <td class="inv-id" title="${r.d||''}">${r.inv||'—'}</td>
       <td>${fmt(r.due)}</td>
       <td style="font-weight:700;color:#4E86DE">${fmt(r.shipped)}</td>
       <td><span class="badge badge-sent">📦 ส่งแล้ว</span></td>
-    </tr>`).join('')||`<tr><td colspan="6" style="text-align:center;padding:16px;color:var(--text-muted)">ไม่มีรายการ</td></tr>`;
+    </tr>`).join('')||`<tr><td colspan="6" style="text-align:center;padding:18px;color:var(--text-muted)">ไม่มีรายการ</td></tr>`;
     return;
   }
 
@@ -1088,14 +1117,14 @@ function renderModalTable(tab) {
     const rows=d.overdue||[];
     thead.innerHTML=`<tr><th>#</th><th>ลูกค้า</th><th>Inv ID</th><th>Due เดิม</th><th>Stock</th><th>Balance PO</th><th>สถานะ</th></tr>`;
     tbody.innerHTML=rows.map((r,i)=>`<tr>
-      <td style="color:var(--text-muted);font-size:9.5px">${i+1}</td>
+      <td style="color:var(--text-muted);font-size:10px">${i+1}</td>
       <td>${custChip(r.c)}</td>
       <td class="inv-id" title="${r.d||''}">${r.inv||'—'}</td>
       <td><span style="color:#f87171;font-weight:700">${thaiDate(r.origDue||r.dk)}</span></td>
       <td style="font-weight:600;color:${(r.stock||0)>0?'var(--green)':'var(--text-muted)'}">${fmt(r.stock)}</td>
       <td style="font-weight:700;color:var(--red)">${fmt(r.balPO)}</td>
       <td><span class="badge badge-red">🔴 ค้างส่ง</span></td>
-    </tr>`).join('')||`<tr><td colspan="7" style="text-align:center;padding:16px;color:var(--text-muted)">ไม่มีรายการค้างส่ง 🎉</td></tr>`;
+    </tr>`).join('')||`<tr><td colspan="7" style="text-align:center;padding:18px;color:var(--text-muted)">ไม่มีรายการค้างส่ง 🎉</td></tr>`;
     return;
   }
 
@@ -1103,14 +1132,14 @@ function renderModalTable(tab) {
     const rows=d.late_list||[];
     thead.innerHTML=`<tr><th>#</th><th>ลูกค้า</th><th>Inv ID</th><th>Due เดิม</th><th>วันที่ส่ง</th><th>Shipment</th><th>สถานะ</th></tr>`;
     tbody.innerHTML=rows.map((r,i)=>`<tr>
-      <td style="color:var(--text-muted);font-size:9.5px">${i+1}</td>
+      <td style="color:var(--text-muted);font-size:10px">${i+1}</td>
       <td>${custChip(r.c)}</td>
       <td class="inv-id" title="${r.d||''}">${r.inv||'—'}</td>
       <td style="font-weight:600;color:var(--amber)">${thaiDate(r.origDue)}</td>
       <td style="font-weight:600">${thaiDate(r.shipDate)}</td>
       <td style="font-weight:700;color:var(--green)">${fmt(r.shipped)}</td>
       <td><span class="badge badge-amber">⏰ ล่าช้า</span></td>
-    </tr>`).join('')||`<tr><td colspan="7" style="text-align:center;padding:16px;color:var(--text-muted)">ไม่มีรายการล่าช้า 🎉</td></tr>`;
+    </tr>`).join('')||`<tr><td colspan="7" style="text-align:center;padding:18px;color:var(--text-muted)">ไม่มีรายการล่าช้า 🎉</td></tr>`;
     return;
   }
 
@@ -1119,15 +1148,15 @@ function renderModalTable(tab) {
   tbody.innerHTML=rows.map((r,i)=>{
     const sh=r.status==='not_ready'?(r.sh||0):0;
     return `<tr>
-      <td style="color:var(--text-muted);font-size:9.5px">${i+1}</td>
+      <td style="color:var(--text-muted);font-size:10px">${i+1}</td>
       <td>${custChip(r.c)}</td>
       <td class="inv-id" title="${r.d||''}">${r.inv||'—'}</td>
       <td>${fmt(r.due)}</td>
       <td style="font-weight:600;color:${(r.stock||0)>0?'var(--green)':'var(--text-muted)'}">${fmt(r.stock)}</td>
-      <td>${r.status==='not_ready'&&sh>0?`<div style="font-weight:700;color:var(--red);font-size:11px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:100%"></div></div>`:`<span class="badge badge-green">Stock พอ</span>`}</td>
+      <td>${r.status==='not_ready'&&sh>0?`<div style="font-weight:700;color:var(--red);font-size:12px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:100%"></div></div>`:`<span class="badge badge-green">Stock พอ</span>`}</td>
       <td>${r.status==='ready'?'<span class="badge badge-green">✅ พร้อมส่ง</span>':'<span class="badge badge-red">❌ ไม่พร้อม</span>'}</td>
     </tr>`;
-  }).join('')||`<tr><td colspan="7" style="text-align:center;padding:16px;color:var(--text-muted)">ไม่มีรายการ</td></tr>`;
+  }).join('')||`<tr><td colspan="7" style="text-align:center;padding:18px;color:var(--text-muted)">ไม่มีรายการ</td></tr>`;
 }
 
 // ─── NOT READY TABLE ───
@@ -1160,24 +1189,24 @@ function renderTable(filter) {
     if(r._rowType==='overdue'){
       const absV=Math.abs(r.balPO||0);
       const pct=Math.min(100,Math.round((absV/maxVal)*100));
-      shortCell=absV>0?`<div style="font-weight:700;color:#f87171;font-size:10.5px">${fmt(absV)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%;background:#f87171"></div></div>`:`<span style="font-size:9px;color:var(--text-dim)">—</span>`;
+      shortCell=absV>0?`<div style="font-weight:700;color:#f87171;font-size:11.5px">${fmt(absV)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%;background:#f87171"></div></div>`:`<span style="font-size:10px;color:var(--text-dim)">—</span>`;
       statusCell=`<span class="badge badge-red">🔴 ค้างส่ง</span>`;
     } else {
       const sh=r.sh||0,pct=Math.min(100,Math.round((sh/maxVal)*100));
-      shortCell=sh>0?`<div style="font-weight:700;color:var(--red);font-size:10.5px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%"></div></div>`:`<span class="badge badge-green">Stock พอ</span>`;
+      shortCell=sh>0?`<div style="font-weight:700;color:var(--red);font-size:11.5px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%"></div></div>`:`<span class="badge badge-green">Stock พอ</span>`;
       statusCell=`<span class="badge badge-red">❌ ไม่พร้อม</span>`;
     }
     return `<tr>
-      <td style="color:var(--text-muted);font-size:9.5px;font-weight:600">${idx+1}</td>
+      <td style="color:var(--text-muted);font-size:10px;font-weight:600">${idx+1}</td>
       <td>${custChip(r.c)}</td>
       <td class="inv-id" title="${r.d||''}">${r.inv||'—'}</td>
-      <td><span style="font-size:9.5px;font-weight:600;color:${dateColor}">${dateLabel}</span></td>
+      <td><span style="font-size:10.5px;font-weight:600;color:${dateColor}">${dateLabel}</span></td>
       <td>${fmt(r.due)}</td>
       <td style="font-weight:600;color:${(r.stock||0)>0?'var(--green)':'var(--text-muted)'}">${fmt(r.stock)}</td>
       <td>${shortCell}</td>
       <td>${statusCell}</td>
     </tr>`;
-  }).join('')||`<tr><td colspan="8" style="text-align:center;padding:16px;color:var(--text-muted)">ไม่มีรายการที่ยังไม่พร้อม 🎉</td></tr>`;
+  }).join('')||`<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted)">ไม่มีรายการที่ยังไม่พร้อม 🎉</td></tr>`;
 }
 
 // ─── FILE HANDLING ───
