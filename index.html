@@ -172,8 +172,8 @@
 
   .main {
     position: relative; z-index: 1;
-    padding: 12px 18px;
-    display: flex; flex-direction: column; gap: 10px;
+    padding: 10px 16px 8px;
+    display: flex; flex-direction: column; gap: 8px;
     width: 1080px;
     height: calc(1920px - 64px);
     overflow: hidden;
@@ -193,10 +193,11 @@
     padding: 10px 16px 9px; border-bottom: 1px solid var(--border);
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
   }
-  .card-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--text); }
   .card-subtitle { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
   .card-body { padding: 10px 16px; }
 
+  /* ── STATS: ใหญ่ขึ้น ── */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -209,14 +210,14 @@
     -webkit-backdrop-filter: blur(22px) saturate(160%);
     border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.82);
     box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.95);
-    padding: 13px 15px 10px; position: relative; overflow: hidden;
+    padding: 20px 20px 16px; position: relative; overflow: hidden;
     min-width: 0;
   }
-  .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--acc,var(--blue)); }
-  .stat-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 4px; line-height: 1.3; }
-  .stat-value { font-size: 38px; font-weight: 700; line-height: 1; }
-  .stat-sub { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
-  .stat-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 32px; opacity: .70; }
+  .stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; background:var(--acc,var(--blue)); }
+  .stat-label { font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 8px; line-height: 1.3; }
+  .stat-value { font-size: 68px; font-weight: 700; line-height: 1; }
+  .stat-sub { font-size: 13px; color: var(--text-dim); margin-top: 6px; }
+  .stat-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 46px; opacity: .70; }
 
   @keyframes shimmer { 0%{background-position:-400px 0} 100%{background-position:400px 0} }
   .skeleton {
@@ -224,19 +225,20 @@
     background-size: 400px 100%; animation: shimmer 1.4s infinite linear; border-radius: 5px;
   }
 
-  .chart-wrapper { position: relative; height: 240px; }
+  /* ── BAR CHART: สูงขึ้น ── */
+  .chart-wrapper { position: relative; height: 396px; }
   .no-data-overlay {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; color: var(--text-muted);
-    gap: 6px; font-size: 13px; pointer-events: none;
+    gap: 6px; font-size: 14px; pointer-events: none;
   }
   .no-data-overlay .ndo-icon { font-size: 28px; opacity: .3; }
   .no-data-overlay .ndo-text { font-weight: 600; opacity: .5; }
-  .legend-wrap { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; }
-  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
-  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+  .legend-wrap { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); }
+  .legend-dot { width: 11px; height: 11px; border-radius: 3px; }
 
-  /* ── TOMORROW CARD (ปรับใหม่ตามรูป) ── */
+  /* ── TOMORROW CARD: ใหญ่ขึ้น ── */
   .tomorrow-card {
     background: linear-gradient(135deg, rgba(219,234,254,0.75) 0%, rgba(191,219,254,0.65) 100%);
     backdrop-filter: blur(22px);
@@ -255,16 +257,15 @@
   }
   .tomorrow-card:hover { background: linear-gradient(135deg, rgba(219,234,254,0.85) 0%, rgba(191,219,254,0.78) 100%); }
 
-  /* ซ้าย: ชื่อวัน + legend */
   .tom-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 12px 16px;
+    padding: 16px 20px;
     flex-shrink: 0;
-    width: 345px;
+    width: 380px;
     border-right: 1px solid rgba(37,99,235,0.12);
-    gap: 10px;
+    gap: 12px;
   }
   .tom-header-row {
     display: flex;
@@ -273,7 +274,7 @@
     gap: 8px;
   }
   .tom-date-lbl {
-    font-size: 15px;
+    font-size: 28px;
     font-weight: 700;
     color: #1e3a8a;
     line-height: 1.2;
@@ -281,27 +282,26 @@
   .tom-toggle-btn {
     display: inline-flex; align-items: center; gap: 4px;
     background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8);
-    color: rgba(30,58,138,.9); border-radius: 9px; padding: 4px 10px;
-    font-size: 11px; font-weight: 600; cursor: pointer;
+    color: rgba(30,58,138,.9); border-radius: 9px; padding: 6px 12px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
     font-family: 'Kanit', sans-serif; transition: all .15s; white-space: nowrap;
     flex-shrink: 0;
   }
   .tom-toggle-btn:hover { background: rgba(255,255,255,.82); }
 
-  /* Legend พร้อม/ไม่พร้อม */
   .tom-legend {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     flex: 1;
     justify-content: center;
   }
   .tom-legend-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 7px 10px;
-    border-radius: 9px;
+    gap: 14px;
+    padding: 11px 14px;
+    border-radius: 11px;
     background: rgba(255,255,255,.50);
     border: 1px solid rgba(255,255,255,.8);
     cursor: pointer;
@@ -309,34 +309,33 @@
   }
   .tom-legend-item:hover { background: rgba(255,255,255,.78); transform: translateX(2px); }
   .tom-legend-bar {
-    width: 4px;
-    height: 32px;
+    width: 6px;
+    height: 52px;
     border-radius: 3px;
     flex-shrink: 0;
   }
   .tom-legend-bar.green { background: #22A652; }
   .tom-legend-bar.red   { background: #E05C63; }
   .tom-legend-count {
-    font-size: 26px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 1;
   }
   .tom-legend-count.green { color: #2d7d72; }
   .tom-legend-count.red   { color: #E05C63; }
   .tom-legend-label {
-    font-size: 11px;
+    font-size: 13px;
     color: rgba(30,58,138,.65);
     line-height: 1.3;
   }
 
   .tom-hint {
-    font-size: 10px;
+    font-size: 11px;
     color: rgba(30,58,138,.38);
     text-align: right;
     margin-top: 2px;
   }
 
-  /* กลาง+ขวา: รายการ */
   .tom-right {
     flex: 1;
     display: grid;
@@ -347,62 +346,63 @@
   .tom-col {
     display: flex;
     flex-direction: column;
-    padding: 12px 14px;
+    padding: 16px 18px;
     min-width: 0;
-    gap: 5px;
+    gap: 6px;
   }
   .tom-col:first-child {
     border-right: 1px solid rgba(37,99,235,0.10);
   }
   .tom-list-header {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .5px;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
     flex-shrink: 0;
   }
   .tom-list-col {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     overflow-y: auto;
     flex: 1;
-    max-height: 130px;
+    max-height: 170px;
   }
   .tom-item-row {
-    display: flex; align-items: center; gap: 5px; padding: 4px 8px;
-    border-radius: 7px; background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8);
+    display: flex; align-items: center; gap: 6px; padding: 6px 10px;
+    border-radius: 8px; background: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.8);
     min-width: 0;
   }
-  .tom-item-name { font-size: 11px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; }
+  .tom-item-name { font-size: 13px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; }
   .tom-cust-name {
-    font-size: 10px; font-weight: 600; color: #1e40af;
+    font-size: 11px; font-weight: 600; color: #1e40af;
     background: rgba(219,234,254,.7); border: 1px solid rgba(147,197,253,.5);
-    border-radius: 4px; padding: 1px 5px; flex-shrink: 0;
-    max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    border-radius: 4px; padding: 2px 6px; flex-shrink: 0;
+    max-width: 66px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
 
+  /* ── DONUTS: ใหญ่ขึ้น ── */
   .donuts-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; flex-shrink: 0; }
   .donut-mini-card {
     background: rgba(255,255,255,0.52);
     backdrop-filter: blur(18px);
     border-radius: 12px; border: 1px solid rgba(255,255,255,0.82);
     box-shadow: var(--shadow);
-    padding: 10px 10px 10px;
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 14px 14px 13px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
     min-width: 0;
   }
-  .donut-mini-label { font-size: 13px; font-weight: 600; color: #1e40af; text-align: center; line-height: 1.2; }
-  .donut-mini-wrap { position: relative; height: 90px; width: 90px; display: flex; align-items: center; justify-content: center; }
+  .donut-mini-label { font-size: 15px; font-weight: 600; color: #1e40af; text-align: center; line-height: 1.2; }
+  .donut-mini-wrap { position: relative; height: 150px; width: 150px; display: flex; align-items: center; justify-content: center; }
   .donut-center { position: absolute; text-align: center; pointer-events: none; }
-  .donut-center .dc-val { font-size: 19px; font-weight: 700; color: rgba(15,23,42,0.85); line-height: 1; }
-  .donut-center .dc-label { font-size: 10px; color: var(--text-muted); }
-  .donut-stats { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+  .donut-center .dc-val { font-size: 46px; font-weight: 700; color: rgba(15,23,42,0.85); line-height: 1; }
+  .donut-center .dc-label { font-size: 12px; color: var(--text-muted); }
+  .donut-stats { display: flex; flex-direction: column; gap: 5px; width: 100%; }
   .donut-stat-item { display: flex; align-items: center; justify-content: space-between; }
-  .donut-stat-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-  .donut-stat-lbl { font-size: 11px; color: var(--text-muted); flex: 1; margin: 0 5px; }
-  .donut-stat-val { font-size: 14px; font-weight: 700; }
+  .donut-stat-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+  .donut-stat-lbl { font-size: 26px; color: var(--text-muted); flex: 1; margin: 0 6px; }
+  .donut-stat-val { font-size: 28px; font-weight: 700; }
 
   .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
   .filter-btn {
@@ -413,14 +413,15 @@
   .filter-btn.active { background: rgba(219,234,254,.85); color: var(--blue); border-color: rgba(37,99,235,.4); }
   .filter-btn:hover:not(.active) { background: rgba(255,255,255,.85); }
 
+  /* ── TABLE: เล็กลงมาก ── */
   .table-scroll {
     overflow-x: auto;
     overflow-y: auto;
     contain: inline-size;
   }
-  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 420px; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 10.5px; min-width: 420px; }
   .data-table th {
-    padding: 7px 12px; text-align: left; font-size: 11px; font-weight: 600;
+    padding: 4px 8px; text-align: left; font-size: 9.5px; font-weight: 600;
     color: var(--text-dim); text-transform: uppercase; letter-spacing: .4px;
     border-bottom: 1px solid var(--border);
     background: rgba(225,238,252,0.97);
@@ -429,24 +430,24 @@
     white-space: nowrap; position: sticky; top: 0; z-index: 1;
     box-shadow: 0 1px 0 rgba(160,200,255,0.4);
   }
-  .data-table td { padding: 7px 12px; border-bottom: 1px solid rgba(148,163,184,.12); color: var(--text); }
+  .data-table td { padding: 4px 8px; border-bottom: 1px solid rgba(148,163,184,.10); color: var(--text); }
   .data-table tr:last-child td { border-bottom: none; }
   .data-table tr:hover td { background: rgba(219,234,254,.25); }
 
   .cust-chip {
     display: inline-block;
     background: rgba(219,234,254,.75); border: 1px solid rgba(147,197,253,.6);
-    border-radius: 5px; padding: 2px 7px;
-    font-size: 11px; font-weight: 600; color: #1e40af;
-    max-width: 82px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    border-radius: 4px; padding: 1px 4px;
+    font-size: 9.5px; font-weight: 600; color: #1e40af;
+    max-width: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     vertical-align: middle;
   }
 
-  .part-cell { max-width: 130px; }
-  .part-name { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .part-no { font-size: 10px; color: var(--text-dim); font-family: 'DM Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+  .part-cell { max-width: 116px; }
+  .part-name { font-size: 10.5px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .part-no { font-size: 8.5px; color: var(--text-dim); font-family: 'DM Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
 
-  .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge { display: inline-flex; align-items: center; padding: 1px 5px; border-radius: 20px; font-size: 9.5px; font-weight: 600; }
   .badge-red   { background: rgba(220,38,38,.1); color: var(--red); border: 1px solid rgba(220,38,38,.2); }
   .badge-green { background: rgba(5,150,105,.1); color: var(--green); border: 1px solid rgba(5,150,105,.2); }
   .badge-amber { background: rgba(217,119,6,.1); color: var(--amber); border: 1px solid rgba(217,119,6,.2); }
@@ -456,7 +457,16 @@
   .shortage-bar { height: 3px; background: rgba(248,113,113,.2); border-radius: 3px; overflow: hidden; margin-top: 2px; }
   .shortage-fill { height: 100%; background: var(--red); border-radius: 3px; }
 
-  .inv-id { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--blue); font-weight: 600; }
+  .inv-id { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--blue); font-weight: 600; }
+
+  /* bottom table card header */
+  .bottom-card-header {
+    padding: 6px 12px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    flex-wrap: wrap; gap: 5px; flex-shrink: 0;
+  }
+  .bottom-card-title { font-size: 12px; font-weight: 700; color: var(--text); }
+  .bottom-card-subtitle { font-size: 9.5px; color: var(--text-muted); margin-top: 1px; }
 
   .modal-overlay {
     display: none;
@@ -504,7 +514,7 @@
   }
   .modal-tab.active { background: rgba(219,234,254,.85); color: var(--blue); border-color: rgba(37,99,235,.4); }
 
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: rgba(148,163,184,.08); }
   ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.35); border-radius: 3px; }
 
@@ -603,25 +613,25 @@
   <div class="stats-grid">
     <div class="stat-card" style="--acc:#60a5fa">
       <div class="stat-label">ยอดส่งวันนี้ทั้งหมด</div>
-      <div class="stat-value" id="stat-total"><span class="skeleton" style="display:inline-block;height:30px;width:52px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-total"><span class="skeleton" style="display:inline-block;height:48px;width:70px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">รายการ</div>
       <div class="stat-icon">📦</div>
     </div>
     <div class="stat-card" style="--acc:#34d399">
       <div class="stat-label">พร้อมส่ง วันนี้</div>
-      <div class="stat-value" id="stat-ready" style="color:var(--green)"><span class="skeleton" style="display:inline-block;height:30px;width:52px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-ready" style="color:var(--green)"><span class="skeleton" style="display:inline-block;height:48px;width:70px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">รายการ</div>
       <div class="stat-icon">✅</div>
     </div>
     <div class="stat-card" style="--acc:#f87171">
       <div class="stat-label">ยังไม่พร้อม วันนี้</div>
-      <div class="stat-value" id="stat-notready" style="color:var(--red)"><span class="skeleton" style="display:inline-block;height:30px;width:52px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-notready" style="color:var(--red)"><span class="skeleton" style="display:inline-block;height:48px;width:70px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">รายการ</div>
       <div class="stat-icon">⚠️</div>
     </div>
     <div class="stat-card" style="--acc:#fbbf24">
       <div class="stat-label">ความพร้อม % วันนี้</div>
-      <div class="stat-value" id="stat-pct" style="color:var(--amber)"><span class="skeleton" style="display:inline-block;height:30px;width:52px;vertical-align:middle">&nbsp;</span></div>
+      <div class="stat-value" id="stat-pct" style="color:var(--amber)"><span class="skeleton" style="display:inline-block;height:48px;width:70px;vertical-align:middle">&nbsp;</span></div>
       <div class="stat-sub">พร้อมส่ง</div>
       <div class="stat-icon">📊</div>
     </div>
@@ -643,7 +653,7 @@
           <div class="ndo-text">รอโหลดข้อมูล...</div>
         </div>
       </div>
-      <div class="legend-wrap" style="margin-top:10px">
+      <div class="legend-wrap" style="margin-top:8px">
         <div class="legend-item"><div class="legend-dot" style="background:#22A652"></div>พร้อมส่ง</div>
         <div class="legend-item"><div class="legend-dot" style="background:#E05C63"></div>ไม่พร้อมส่ง</div>
         <div class="legend-item"><div class="legend-dot" style="background:rgba(208,129,141,0.75);border:1px solid #D0818D"></div>ค้างส่ง</div>
@@ -653,10 +663,8 @@
     </div>
   </div>
 
-  <!-- ROW 3: TOMORROW CARD (ปรับใหม่) -->
+  <!-- ROW 3: TOMORROW CARD -->
   <div class="tomorrow-card" id="tomorrowCard">
-
-    <!-- ซ้าย: วันที่ + legend -->
     <div class="tom-left">
       <div class="tom-header-row">
         <div class="tom-date-lbl" id="tomDateLabel">📅 พรุ่งนี้</div>
@@ -665,8 +673,6 @@
           <span id="tomToggleLabel">Part No</span>
         </button>
       </div>
-
-      <!-- Legend พร้อม/ไม่พร้อม -->
       <div class="tom-legend">
         <div class="tom-legend-item" id="tomReadyPill" onclick="event.stopPropagation();openDayModal(TOMORROW,'ready')">
           <div class="tom-legend-bar green"></div>
@@ -683,11 +689,8 @@
           </div>
         </div>
       </div>
-
       <div class="tom-hint">แตะที่การ์ดเพื่อดูรายละเอียด</div>
     </div>
-
-    <!-- กลาง+ขวา: รายการ -->
     <div class="tom-right">
       <div class="tom-col">
         <div class="tom-list-header" style="color:#2d7d72">✅ พร้อมส่ง</div>
@@ -698,7 +701,6 @@
         <div id="tomNotReadyList" class="tom-list-col"></div>
       </div>
     </div>
-
   </div>
 
   <!-- ROW 4: DONUTS -->
@@ -772,12 +774,12 @@
     </div>
   </div>
 
-  <!-- ROW 5: NOT READY TABLE -->
+  <!-- ROW 5: NOT READY TABLE (เล็กลง) -->
   <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column;">
-    <div class="card-header" style="flex-wrap:wrap;gap:8px;flex-shrink:0">
+    <div class="bottom-card-header">
       <div>
-        <div class="card-title">รายการที่ยังไม่พร้อมส่ง</div>
-        <div class="card-subtitle">เรียงตามยอดขาดน้อย→มาก</div>
+        <div class="bottom-card-title">รายการที่ยังไม่พร้อมส่ง</div>
+        <div class="bottom-card-subtitle">เรียงตามยอดขาดน้อย→มาก</div>
       </div>
       <div class="filter-row">
         <button class="filter-btn active" onclick="filterTable('all')" id="btn-all">ทั้งหมด</button>
@@ -790,19 +792,19 @@
       <table class="data-table">
         <thead>
           <tr>
-            <th style="width:28px">#</th>
-            <th style="width:72px">ลูกค้า</th>
-            <th style="width:140px">ชิ้นงาน</th>
-            <th style="width:105px">Inventory ID</th>
-            <th style="width:60px">วันที่</th>
-            <th style="width:50px">Due</th>
-            <th style="width:50px">Stock</th>
-            <th style="width:80px">ขาด ▲</th>
-            <th style="width:75px">สถานะ</th>
+            <th style="width:22px">#</th>
+            <th style="width:62px">ลูกค้า</th>
+            <th style="width:128px">ชิ้นงาน</th>
+            <th style="width:96px">Inventory ID</th>
+            <th style="width:50px">วันที่</th>
+            <th style="width:42px">Due</th>
+            <th style="width:42px">Stock</th>
+            <th style="width:70px">ขาด ▲</th>
+            <th style="width:66px">สถานะ</th>
           </tr>
         </thead>
         <tbody id="notReadyBody">
-          <tr><td colspan="9" style="text-align:center;padding:24px;color:var(--text-muted)">รอโหลดข้อมูล...</td></tr>
+          <tr><td colspan="9" style="text-align:center;padding:14px;color:var(--text-muted)">รอโหลดข้อมูล...</td></tr>
         </tbody>
       </table>
     </div>
@@ -1262,28 +1264,28 @@ function renderTable(filter) {
     if(r._rowType==='overdue'){
       const absV=Math.abs(r.balPO||0);
       const pct=Math.min(100,Math.round((absV/maxVal)*100));
-      shortCell=absV>0?`<div style="font-weight:700;color:#f87171;font-size:12px">${fmt(absV)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%;background:#f87171"></div></div>`:`<span style="font-size:11px;color:var(--text-dim)">—</span>`;
+      shortCell=absV>0?`<div style="font-weight:700;color:#f87171;font-size:10px">${fmt(absV)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%;background:#f87171"></div></div>`:`<span style="font-size:10px;color:var(--text-dim)">—</span>`;
       statusCell=`<span class="badge badge-red">🔴 ค้างส่ง</span>`;
     } else {
       const sh=r.sh||0,pct=Math.min(100,Math.round((sh/maxVal)*100));
-      shortCell=sh>0?`<div style="font-weight:700;color:var(--red);font-size:12px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%"></div></div>`:`<span class="badge badge-green">Stock พอ</span>`;
+      shortCell=sh>0?`<div style="font-weight:700;color:var(--red);font-size:10px">${fmt(sh)}</div><div class="shortage-bar"><div class="shortage-fill" style="width:${pct}%"></div></div>`:`<span class="badge badge-green">Stock พอ</span>`;
       statusCell=`<span class="badge badge-red">❌ ไม่พร้อม</span>`;
     }
     return `<tr>
-      <td style="color:var(--text-muted);font-size:11px;font-weight:600">${idx+1}</td>
+      <td style="color:var(--text-muted);font-size:9.5px;font-weight:600">${idx+1}</td>
       <td>${custChip(r.c)}</td>
       <td class="part-cell">
         <div class="part-name" title="${r.d||''}">${r.d||'—'}</div>
         ${r.pno?`<div class="part-no">${r.pno}</div>`:''}
       </td>
       <td class="inv-id">${r.inv||'—'}</td>
-      <td><span style="font-size:12px;font-weight:600;color:${dateColor}">${dateLabel}</span></td>
+      <td><span style="font-size:10px;font-weight:600;color:${dateColor}">${dateLabel}</span></td>
       <td>${fmt(r.due)}</td>
       <td style="font-weight:600;color:${(r.stock||0)>0?'var(--green)':'var(--text-muted)'}">${fmt(r.stock)}</td>
       <td>${shortCell}</td>
       <td>${statusCell}</td>
     </tr>`;
-  }).join('')||`<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--text-muted)">ไม่มีรายการที่ยังไม่พร้อม 🎉</td></tr>`;
+  }).join('')||`<tr><td colspan="9" style="text-align:center;padding:14px;color:var(--text-muted)">ไม่มีรายการที่ยังไม่พร้อม 🎉</td></tr>`;
 }
 
 // ─── FILE HANDLING ───
