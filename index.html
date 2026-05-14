@@ -693,7 +693,7 @@
         <div class="tom-date-lbl" id="tomDateLabel">📅 พรุ่งนี้</div>
         <button class="tom-toggle-btn" id="tomToggleBtn" onclick="toggleTomView(event)">
           <span id="tomToggleIcon">🔖</span>
-          <span id="tomToggleLabel">Part No</span>
+          <span id="tomToggleLabel">Inv id</span>
         </button>
       </div>
       <div class="tom-legend">
@@ -912,7 +912,7 @@ function toggleTomView(e) {
   e.stopPropagation();
   _tomViewMode = _tomViewMode==='name' ? 'inv' : 'name';
   document.getElementById('tomToggleIcon').textContent  = _tomViewMode==='name' ? '🔖' : '🏷';
-  document.getElementById('tomToggleLabel').textContent = _tomViewMode==='name' ? 'Part No' : 'Part Name';
+  document.getElementById('tomToggleLabel').textContent = _tomViewMode==='name' ? 'Inv id' : 'Part Name';
   renderTomLists();
 }
 
