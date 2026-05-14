@@ -887,7 +887,7 @@ function toggleTomView(e) {
   e.stopPropagation();
   _tomViewMode = _tomViewMode==='name' ? 'inv' : 'name';
   document.getElementById('tomToggleIcon').textContent  = _tomViewMode==='name' ? '🔖' : '🏷';
-  document.getElementById('tomToggleLabel').textContent = _tomViewMode==='name' ? 'Part No' : 'ชื่อ';
+  document.getElementById('tomToggleLabel').textContent = _tomViewMode==='name' ? 'Part No' : 'Part Name';
   renderTomLists();
 }
 
