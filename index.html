@@ -691,9 +691,10 @@
     <div class="tom-left">
       <div class="tom-header-row">
         <div class="tom-date-lbl" id="tomDateLabel">📅 พรุ่งนี้</div>
+        <!-- ปุ่ม toggle: เปลี่ยนจาก Part No → Inv ID -->
         <button class="tom-toggle-btn" id="tomToggleBtn" onclick="toggleTomView(event)">
-          <span id="tomToggleIcon">🔖</span>
-          <span id="tomToggleLabel">Inv id</span>
+          <span id="tomToggleIcon">🏷</span>
+          <span id="tomToggleLabel">Inv ID</span>
         </button>
       </div>
       <div class="tom-legend">
@@ -863,7 +864,8 @@
 let DATA = {};
 let _lastHash = '';
 let _dataLoaded = false;
-let _tomViewMode = 'name';
+// ค่าเริ่มต้น: 'inv' = แสดง Inventory ID (default ใหม่)
+let _tomViewMode = 'inv';
 let _lastFileName = null;
 let _savedBytes = null;
 
@@ -908,23 +910,28 @@ function openSettings() { document.getElementById('settingsOverlay').classList.a
 function closeSettings() { document.getElementById('settingsOverlay').classList.remove('open'); }
 function closeSettingsIfBg(e) { if(e.target===document.getElementById('settingsOverlay')) closeSettings(); }
 
+// ── TOGGLE: สลับระหว่าง Inventory ID ↔ Part Name ──
 function toggleTomView(e) {
   e.stopPropagation();
-  _tomViewMode = _tomViewMode==='name' ? 'inv' : 'name';
-  document.getElementById('tomToggleIcon').textContent  = _tomViewMode==='name' ? '🔖' : '🏷';
-  document.getElementById('tomToggleLabel').textContent = _tomViewMode==='name' ? 'Inv id' : 'Part Name';
+  // 'inv' = แสดง Inventory ID, 'name' = แสดง Part Name
+  _tomViewMode = _tomViewMode === 'inv' ? 'name' : 'inv';
+  document.getElementById('tomToggleIcon').textContent  = _tomViewMode === 'inv' ? '🏷' : '🔖';
+  document.getElementById('tomToggleLabel').textContent = _tomViewMode === 'inv' ? 'Inv ID' : 'Part Name';
   renderTomLists();
 }
 
 function renderTomLists() {
   const tmData = DATA[TOMORROW] || {ready:[],not_ready:[]};
-  const showInv = _tomViewMode==='inv';
+  // โหมด 'inv' = แสดง Inventory ID เป็น label หลัก, Part Name เป็น sub
+  // โหมด 'name' = แสดง Part Name เป็น label หลัก, Inv ID เป็น sub
+  const showInv = _tomViewMode === 'inv';
+
   const renderItem = (r, color) => {
-    const label = showInv ? (r.pno || r.inv || '—') : (r.d || '—');
+    const label = showInv ? (r.inv || '—') : (r.d || '—');
     const sub = showInv
-      ? (r.inv ? `<div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text-dim);line-height:1">${r.inv}</div>` : '')
-      : (r.pno ? `<div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text-dim);line-height:1">${r.pno}</div>` : '');
-    return `<div class="tom-item-row" title="${r.d||''}${r.pno?' ('+r.pno+')':''}">
+      ? (r.d ? `<div style="font-size:11px;color:var(--text-dim);line-height:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.d}</div>` : '')
+      : (r.inv ? `<div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text-dim);line-height:1">${r.inv}</div>` : '');
+    return `<div class="tom-item-row" title="${r.d||''}${r.inv?' | '+r.inv:''}">
       <div style="flex:1;min-width:0">
         <div class="tom-item-name" style="color:${color}">${label}</div>
         ${sub}
