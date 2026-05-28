@@ -141,10 +141,11 @@
 
   /* SIDEBAR SECTIONS */
   .gs-connect { padding: 14px 14px 4px; }
+  /* FIX 1: gs-label สีขาวขึ้น (เดิม 0.3 → ใหม่ 0.8) */
   .gs-label {
     font-size: 9px;
     font-weight: 600;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.8);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 8px;
@@ -187,10 +188,10 @@
   .file-picker-area:hover { border-color: var(--accent); background: rgba(37,99,235,0.08); }
   .file-picker-area input[type="file"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 2; }
   .file-picker-icon { font-size: 18px; margin-bottom: 4px; }
-  .file-picker-text { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.4; }
-  .file-picker-hint { font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 2px; }
+  .file-picker-text { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.4; }
+  .file-picker-hint { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
 
-  #srcFile { font-size: 10px; color: rgba(255,255,255,0.35); word-break: break-all; line-height: 1.5; margin-bottom: 6px; min-height: 16px; font-family: 'DM Mono', monospace; }
+  #srcFile { font-size: 10px; color: rgba(255,255,255,0.5); word-break: break-all; line-height: 1.5; margin-bottom: 6px; min-height: 16px; font-family: 'DM Mono', monospace; }
 
   .gs-btn {
     width: 100%;
@@ -210,7 +211,8 @@
   .gs-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .gs-status { font-size: 10.5px; margin-top: 6px; color: rgba(255,255,255,0.35); min-height: 16px; }
-  .gs-help   { font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 6px; line-height: 1.5; }
+  /* FIX 1c: gs-help สีขาวขึ้น */
+  .gs-help   { font-size: 10px; color: rgba(255,255,255,0.65); margin-top: 6px; line-height: 1.5; }
 
   .gs-input {
     width: 100%;
@@ -227,10 +229,11 @@
     transition: border-color .15s;
   }
   .gs-input:focus { border-color: var(--accent); background: rgba(255,255,255,0.09); }
-  .gs-input::placeholder { color: rgba(255,255,255,0.25); }
+  .gs-input::placeholder { color: rgba(255,255,255,0.35); }
 
+  /* FIX 1b: ar-label สีขาวขึ้น */
   .ar-row { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.08); }
-  .ar-label { font-size: 11px; color: rgba(255,255,255,0.35); }
+  .ar-label { font-size: 11px; color: rgba(255,255,255,0.8); }
   .ar-select {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.15);
@@ -372,11 +375,10 @@
   .card-subtitle { font-size: 10px; color: var(--light); margin-top: 2px; }
   .card-body     { padding: 14px 20px; }
 
-  /* ── TOMORROW CARD ── */
+  /* ── TOMORROW CARD ── FIX 4: เอา border-left สีน้ำเงินออก */
   .tomorrow-card {
     background: var(--white);
     border: 1px solid var(--div);
-    border-left: 3px solid var(--accent);
     border-radius: 2px;
     padding: 18px 20px;
     cursor: pointer;
@@ -451,7 +453,8 @@
     background: var(--off);
   }
   .tom-item-row:hover { background: #f1f5f9; border-color: var(--div-med); }
-  .tom-item-name { font-size: 11px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; color: var(--dark-blue); }
+  /* FIX 2: tom-item-name สีทึบขึ้น font-weight 600 */
+  .tom-item-name { font-size: 11px; font-weight: 600; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.3; color: var(--dark-blue); }
 
   /* ── CHARTS ── */
   .chart-wrapper { position: relative; height: 250px; }
@@ -480,10 +483,7 @@
     color: var(--dark-blue);
   }
   .data-table tr:last-child td { border-bottom: none; }
-  /* ── HOVER: เอา border-left สีฟ้าออก ใช้แค่ background ── */
-  .data-table tr:hover td {
-    background: var(--off);
-  }
+  .data-table tr:hover td { background: var(--off); }
   .table-scroll { overflow-y: auto; }
   .sk-row td { border-bottom: 1px solid var(--div); padding: 11px 20px; }
   .sk-cell { height: 11px; border-radius: 2px; }
@@ -624,18 +624,13 @@
 
   /* ══════════════════════════════════
      MOBILE RESPONSIVE
-     (desktop layout ไม่โดนแตะ)
   ══════════════════════════════════ */
-
-  /* Tablet / จอแนวตั้ง ≤ 900px */
   @media (max-width: 900px) {
-    /* Sidebar เป็น overlay เสมอ ไม่ดัน main */
     .main { margin-left: 0 !important; }
     body:not(.sidebar-hidden) .sidebar {
       z-index: 30;
       box-shadow: 6px 0 28px rgba(13,27,42,0.28);
     }
-    /* Overlay backdrop เมื่อ sidebar เปิด */
     body:not(.sidebar-hidden)::after {
       content: '';
       position: fixed;
@@ -643,114 +638,57 @@
       background: rgba(13,27,42,0.35);
       z-index: 25;
     }
-
     .topbar { padding: 0 16px; }
-
     .content { padding: 16px 14px; }
-
-    /* Stats: 2 × 2 */
-    .stats-row {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    /* Chart + Tomorrow: stack */
-    .row-2 {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    /* Donuts: stack */
-    .row-3 {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    /* Tomorrow card height auto */
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px; }
+    .row-2 { grid-template-columns: 1fr; gap: 10px; margin-bottom: 12px; }
+    .row-3 { grid-template-columns: 1fr; gap: 10px; margin-bottom: 12px; }
     .tomorrow-card { height: auto; }
-
-    /* Table horizontal scroll */
     .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .data-table { min-width: 600px; }
-
-    /* Modal */
     .modal { max-width: 98vw; }
   }
 
-  /* Phone ≤ 600px */
   @media (max-width: 600px) {
     :root { --topbar-h: 50px; }
-
     .topbar { padding: 0 12px; gap: 10px; }
     .topbar-title { font-size: 13px; }
     .today-badge { font-size: 10px; padding: 3px 8px; }
-    /* ซ่อน last-updated บน phone เล็ก */
     #lastUpdatedBadge { display: none; }
-
     .content { padding: 12px 10px; }
-
     .stats-row { gap: 6px; }
     .stat-card { padding: 12px 12px 10px; }
     .stat-value { font-size: 20px; }
     .stat-label { font-size: 8px; }
     .stat-sub   { font-size: 9px; margin-top: 4px; }
     .stat-icon  { font-size: 22px; }
-
     .row-2, .row-3 { gap: 8px; }
-
-    /* Chart เตี้ยลง */
     .chart-wrapper { height: 200px; }
-
-    /* Tomorrow card */
     .tomorrow-big   { font-size: 26px; }
     .tomorrow-label { font-size: 10px; }
     .tomorrow-row   { gap: 8px; }
     .tomorrow-pill  { padding: 10px 12px; min-height: 68px; }
     .pill-val       { font-size: 22px; }
     .pill-label     { font-size: 10px; }
-
-    /* Card header ซ้อนกัน */
     .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
     .card-header > div:last-child { align-self: flex-start; }
-
-    /* Filter buttons เล็กลง */
     .filter-btn { padding: 3px 9px; font-size: 10px; }
-
-    /* Donut */
     .donut-stat-val  { font-size: 14px; }
     .donut-stat-lbl  { font-size: 8px; }
     .donut-stat-row  { gap: 10px; }
-
-    /* Legend wrap tight */
     .legend { gap: 8px; }
     .legend-item { font-size: 9px; }
-
-    /* Modal full-screen */
-    .modal {
-      width: 100%;
-      max-width: 100vw;
-      max-height: 100dvh;
-      border-radius: 0;
-      margin: 0;
-    }
+    .modal { width: 100%; max-width: 100vw; max-height: 100dvh; border-radius: 0; margin: 0; }
     .modal-body { padding: 10px 12px; }
     .modal-tabs { gap: 4px; }
     .modal-tab  { padding: 4px 10px; font-size: 10px; }
-
-    /* Table font */
     .data-table { min-width: 560px; font-size: 11px; }
     .data-table th { padding: 8px 12px; }
     .data-table td { padding: 8px 12px; }
   }
 
-  /* Sidebar backdrop click-close on mobile */
   @media (max-width: 900px) {
-    body:not(.sidebar-hidden)::after {
-      cursor: pointer;
-    }
+    body:not(.sidebar-hidden)::after { cursor: pointer; }
   }
 </style>
 </head>
@@ -835,7 +773,7 @@
       <div class="avatar">S</div>
       <div>
         <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.85)">Saha User</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.35)">Admin</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.5)">Admin</div>
       </div>
     </div>
   </div>
@@ -873,11 +811,12 @@
         <div class="stat-sub">รายการ</div>
         <div class="stat-icon">📦</div>
       </div>
-      <div class="stat-card" style="--acc:var(--green)">
-        <div class="stat-label">พร้อมส่ง วันนี้</div>
-        <div class="stat-value" id="stat-ready" style="color:var(--green)"><span class="skeleton" style="display:inline-block;height:26px;width:48px;vertical-align:middle;border-radius:2px">&nbsp;</span></div>
+      <!-- FIX 6: เปลี่ยน label เป็น "ส่งแล้ว วันนี้" -->
+      <div class="stat-card" style="--acc:var(--accent)">
+        <div class="stat-label">ส่งแล้ว วันนี้</div>
+        <div class="stat-value" id="stat-ready" style="color:var(--accent)"><span class="skeleton" style="display:inline-block;height:26px;width:48px;vertical-align:middle;border-radius:2px">&nbsp;</span></div>
         <div class="stat-sub">รายการ</div>
-        <div class="stat-icon">✅</div>
+        <div class="stat-icon">📦</div>
       </div>
       <div class="stat-card" style="--acc:var(--red)">
         <div class="stat-label">ยังไม่พร้อม วันนี้</div>
@@ -921,7 +860,7 @@
         </div>
       </div>
 
-      <!-- TOMORROW CARD -->
+      <!-- TOMORROW CARD – FIX 4: ไม่มี border-left สีน้ำเงิน -->
       <div class="tomorrow-card" id="tomorrowCard">
         <div class="tom-header-row">
           <h3 id="tomDateLabel">📅 พรุ่งนี้</h3>
@@ -950,7 +889,7 @@
       </div>
     </div>
 
-    <!-- DONUTS -->
+    <!-- DONUTS – FIX 5: วันนี้ card ไม่มี border-top สีน้ำเงิน -->
     <div class="row-3">
       <div class="card">
         <div class="card-header">
@@ -977,7 +916,8 @@
         </div>
       </div>
 
-      <div class="card" style="border-top: 3px solid var(--accent)">
+      <!-- FIX 5: เอา border-top: 3px solid var(--accent) ออก -->
+      <div class="card">
         <div class="card-header">
           <div>
             <div class="card-title" id="tdTitle">วันนี้ ✨</div>
@@ -1160,19 +1100,20 @@ function toggleTomView(e) {
 function renderTomLists() {
   const tmData = DATA[TOMORROW] || {ready:[],not_ready:[]};
   const showInv = _tomViewMode==='inv';
+  // FIX 2: font-weight:600 และ opacity:1 ให้สีทึบ มองชัด
   const renderItem = (r,color) => {
     const label = showInv ? (r.inv||'—') : (r.d||r.c||'—');
     const cust  = r.c||'';
     return `<div class="tom-item-row" title="${r.d||''}">
-      <span class="tom-item-name" style="color:${color}">${label}</span>
+      <span class="tom-item-name" style="color:${color};font-weight:600;opacity:1">${label}</span>
       ${cust?`<span class="tom-cust-name">${cust}</span>`:''}
     </div>`;
   };
   document.getElementById('tomReadyList').innerHTML =
-    (tmData.ready||[]).length ? (tmData.ready||[]).map(r=>renderItem(r,'var(--green)')).join('')
+    (tmData.ready||[]).length ? (tmData.ready||[]).map(r=>renderItem(r,'#16A34A')).join('')
     : `<div style="font-size:11px;color:var(--light);padding:6px 0">ไม่มีรายการ</div>`;
   document.getElementById('tomNotReadyList').innerHTML =
-    (tmData.not_ready||[]).length ? (tmData.not_ready||[]).map(r=>renderItem(r,'var(--red)')).join('')
+    (tmData.not_ready||[]).length ? (tmData.not_ready||[]).map(r=>renderItem(r,'#DC2626')).join('')
     : `<div style="font-size:11px;color:var(--light);padding:6px 0">ไม่มีรายการ</div>`;
 }
 
@@ -1188,7 +1129,6 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('tmTitle').textContent = `พรุ่งนี้ (${thaiDate(TOMORROW)})`;
   document.getElementById('tomDateLabel').textContent = `📅 พรุ่งนี้ (${thaiDate(TOMORROW)})`;
 
-  // Backdrop click to close sidebar on mobile
   document.addEventListener('click', e => {
     if (window.innerWidth <= 900 &&
         !document.body.classList.contains('sidebar-hidden') &&
@@ -1216,9 +1156,13 @@ function renderAll() {
   const td = DATA[TODAY]||{r:0,n:0,sent:0};
   const tdTotal = (td.r||0)+(td.n||0)+(td.sent||0);
   document.getElementById('stat-total').textContent    = tdTotal;
-  document.getElementById('stat-ready').textContent    = td.r||0;
+  // FIX 7: แสดง sent แทน ready
+  document.getElementById('stat-ready').textContent    = td.sent||0;
   document.getElementById('stat-notready').textContent = td.n||0;
-  const pct = (td.r||0)+(td.n||0)>0 ? Math.round((td.r||0)/((td.r||0)+(td.n||0))*100) : 100;
+  // FIX 8: คำนวณ % ใหม่ = (sent+ready)/(sent+ready+notready)
+  const pct = (td.sent||0)+(td.r||0)+(td.n||0)>0
+    ? Math.round(((td.sent||0)+(td.r||0))/((td.sent||0)+(td.r||0)+(td.n||0))*100)
+    : 100;
   document.getElementById('stat-pct').textContent = pct+'%';
 
   const tm = DATA[TOMORROW]||{r:0,n:0};
