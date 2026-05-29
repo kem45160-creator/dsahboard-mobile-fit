@@ -696,6 +696,49 @@
 
   @media (max-width: 900px) {
     body:not(.sidebar-hidden)::after { cursor: pointer; }
+      }
+      @media (min-width: 1080px) and (max-width: 1920px) and (orientation: portrait) {
+    :root { --topbar-h: 72px; }  /* ← แบบนี้ถูกต้อง */
+    .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); }
+    .main { margin-left: 0; }
+    body:not(.sidebar-hidden) .sidebar {
+  transform: translateX(0);
+  z-index: 30;
+  box-shadow: 6px 0 28px rgba(13,27,42,0.28);
+}
+body:not(.sidebar-hidden) .main { margin-left: 0; }
+body:not(.sidebar-hidden)::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(13,27,42,0.35);
+  z-index: 25;
+  cursor: pointer;
+}
+    .stats-row { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .stat-value { font-size: 42px; }
+    .stat-label { font-size: 13px; }
+    .stat-sub   { font-size: 13px; }
+    .row-2 { grid-template-columns: 2fr 1fr !important; }
+    .row-2 > .tomorrow-card { display: flex !important; }
+    .tom-large-section { display: none !important; }
+    .chart-wrapper { height: 500px; } 
+    .donut-wrapper { height: 160px; }
+    .donut-stat-val { font-size: 20px; }
+    .row-3 { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .table-scroll { max-height: 600px !important; }
+    .data-table { font-size: 15px; }
+    .data-table th, .data-table td { padding: 14px 20px; }
+    .topbar-title { font-size: 22px; }
+    .today-badge  { font-size: 16px; padding: 8px 20px; }
+    .tomorrow-big { font-size: 52px; }
+    .pill-val     { font-size: 40px; }
+    .pill-label   { font-size: 14px; }
+    .card-title   { font-size: 14px; }
+    .content { padding: 28px 36px; }
+  }
+</style>
+    
   }
 </style>
 </head>
@@ -1229,7 +1272,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('tmTitleLg').textContent = `พรุ่งนี้ (${thaiDate(TOMORROW)})`;
 
   document.addEventListener('click', e => {
-    if (window.innerWidth <= 900 &&
+    if (window.innerWidth <= 1920 &&
         !document.body.classList.contains('sidebar-hidden') &&
         !e.target.closest('.sidebar') &&
         !e.target.closest('.hamburger')) {
