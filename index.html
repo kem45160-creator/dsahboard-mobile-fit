@@ -538,7 +538,6 @@
     flex-direction: column;
     box-shadow: 0 24px 60px rgba(13,27,42,0.18);
   }
-  .modal::before { content: ''; display: block; height: 3px; background: linear-gradient(90deg, var(--accent) 0%, var(--steel) 100%); }
   .modal-header  { padding: 14px 20px; border-bottom: 1px solid var(--div); display: flex; align-items: center; justify-content: space-between; }
   .modal-title   { font-size: 14px; font-weight: 700; color: var(--navy); }
   .modal-close {
@@ -1104,11 +1103,11 @@ body:not(.sidebar-hidden)::after {
                 <th style="width:70px">Due</th>
                 <th style="width:70px">Stock</th>
                 <th style="width:110px">ขาด ▲</th>
-                <th style="width:80px">สถานะ</th>
+                <th style="width:110px">สถานะ</th>
               </tr>
             </thead>
             <tbody id="notReadyBody">
-              <tr class="sk-row"><td><div class="skeleton sk-cell" style="width:18px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:90px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:110px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:160px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:60px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:40px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:40px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:60px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:70px">&nbsp;</div></td></tr>
+              <tr class="sk-row"><td><div class="skeleton sk-cell" style="width:18px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:90px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:110px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:160px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:60px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:40px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:40px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:60px">&nbsp;</div></td><td><div class="skeleton sk-cell" style="width:110px">&nbsp;</div></td></tr>
             </tbody>
           </table>
         </div>
@@ -1554,7 +1553,7 @@ function renderModalTable(tab) {
       <th style="width:65px">Due</th>
       <th style="width:70px">Stock</th>
       <th style="width:130px">ขาด / จัดส่ง</th>
-      <th style="width:100px">สถานะ</th>
+      <th style="width:110px">สถานะ</th>
     </tr>`;
     document.getElementById('modalBody').innerHTML=rows.map((r,idx)=>{
       let extraCell='';
@@ -1596,7 +1595,7 @@ function renderModalTable(tab) {
       <th style="width:80px">Due</th>
       <th style="width:90px">Shipment</th>
       <th style="width:90px">Balance PO</th>
-      <th style="width:80px">สถานะ</th>
+      <th style="width:100px">สถานะ</th>
     </tr>`;
     document.getElementById('modalBody').innerHTML=rows.map((r,idx)=>`<tr>
       <td style="color:var(--light);font-size:10px;font-weight:600;font-family:'DM Mono',monospace">${idx+1}</td>
@@ -1618,7 +1617,7 @@ function renderModalTable(tab) {
       <th style="width:110px">Due เดิม</th>
       <th style="width:80px">Stock</th>
       <th style="width:120px">Balance PO</th>
-      <th style="width:80px">สถานะ</th>
+      <th style="width:100px">สถานะ</th>
     </tr>`;
     document.getElementById('modalBody').innerHTML=rows.map((r,idx)=>`<tr>
       <td style="color:var(--light);font-size:10px;font-weight:600;font-family:'DM Mono',monospace">${idx+1}</td>
@@ -1663,7 +1662,7 @@ function renderModalTable(tab) {
     <th style="width:65px">Due</th>
     <th style="width:70px">Stock</th>
     <th style="width:120px">ขาด</th>
-    <th style="width:78px">สถานะ</th>
+    <th style="width:110px">สถานะ</th>
   </tr>`;
   document.getElementById('modalBody').innerHTML=rows.map((r,idx)=>{
     const sh=r.status==='not_ready'?(r.sh||0):0;
