@@ -1470,7 +1470,7 @@ function initBarChart() {
       },
       scales:{
         x:{ stacked:true, grid:{display:false}, ticks:{font:{size:10,family:'DM Mono, monospace'},color:'#475569'} },
-        y:{ stacked:true, grid:{color:'rgba(226,232,240,0.8)',drawBorder:false}, ticks:{font:{size:10},color:'#94A3B8'}, beginAtZero:true, grace: '15%' }
+        y:{ stacked:true, grid:{color:'rgba(226,232,240,0.8)',drawBorder:false}, ticks:{font:{size:10},color:'#94A3B8'}, beginAtZero:true, grace: '25%' }
       },
       onClick:(_,elements)=>{ if(elements.length) openDayModal(allDates[elements[0].index],'all'); },
       onHover:(_,elements,chart)=>{ chart.canvas.style.cursor=elements.length?'pointer':'default'; }
