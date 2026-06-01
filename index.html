@@ -1419,12 +1419,12 @@ function initBarChart() {
       ctx.save();
       allDates.forEach((d,i) => {
         const day = DATA[d]||{r:0,n:0,ov:0,l:0,sent:0};
-        const rn  = (day.r||0)+(day.n||0)+(day.sent||0);
-        if (!rn) return;
-        const pct = Math.round(((day.r||0)+(day.sent||0))/rn*100);
-        const stack = rn+(day.ov||0)+(day.l||0)+(day.sent||0);
+        const total = (day.r||0)+(day.n||0)+(day.sent||0);
+        if (!total) return;
+        const pct = Math.round(((day.r||0)+(day.sent||0))/total*100);
+        const stackTop = total+(day.ov||0)+(day.l||0);
         const xPos  = x.getPixelForValue(i);
-        const yPos  = y.getPixelForValue(stack)-5;
+        const yPos  = y.getPixelForValue(stackTop)-5;
         ctx.font = 'bold 9px Sarabun, sans-serif';
         ctx.fillStyle = pct>=80?'#16A34A':pct>=50?'#E8A020':'#DC2626';
         ctx.textAlign = 'center';
