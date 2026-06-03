@@ -599,33 +599,23 @@
   ::-webkit-scrollbar-thumb { background: var(--div-med); border-radius: 2px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--mid); }
 
-  /* ══════════════════════════════════════════
-     LARGE SCREEN 55" / TV (≥1920px)
-     - กราฟแท่งเต็มแนวนอน (row-2 = 1 col)
-     - Tomorrow Card ซ่อนใน row-2
-     - แสดง tom-large-section ด้านล่าง row-3
-  ══════════════════════════════════════════ */
   .tom-large-section {
     display: none;
     margin-bottom: 16px;
   }
 
   @media (min-width: 1920px) and (orientation: portrait) {
-    /* กราฟแท่งเต็มความกว้าง */
     .row-2 {
       grid-template-columns: 1fr !important;
     }
-    /* ซ่อน tomorrow card ที่อยู่ใน row-2 */
     .row-2 > .tomorrow-card {
       display: none !important;
     }
-    /* แสดง large section ด้านล่าง */
     .tom-large-section {
       display: grid !important;
       grid-template-columns: 1fr 1fr !important;
       gap: 12px;
     }
-    /* กราฟสูงขึ้นได้เต็ม ๆ */
     .chart-wrapper {
       height: 320px;
     }
@@ -695,25 +685,25 @@
 
   @media (max-width: 900px) {
     body:not(.sidebar-hidden)::after { cursor: pointer; }
-      }
-      @media (min-width: 1080px) and (max-width: 1920px) and (orientation: portrait) {
-    :root { --topbar-h: 72px; }  /* ← แบบนี้ถูกต้อง */
+  }
+  @media (min-width: 1080px) and (max-width: 1920px) and (orientation: portrait) {
+    :root { --topbar-h: 72px; }
     .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); }
     .main { margin-left: 0; }
     body:not(.sidebar-hidden) .sidebar {
-  transform: translateX(0);
-  z-index: 30;
-  box-shadow: 6px 0 28px rgba(13,27,42,0.28);
-}
-body:not(.sidebar-hidden) .main { margin-left: 0; }
-body:not(.sidebar-hidden)::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: rgba(13,27,42,0.35);
-  z-index: 25;
-  cursor: pointer;
-}
+      transform: translateX(0);
+      z-index: 30;
+      box-shadow: 6px 0 28px rgba(13,27,42,0.28);
+    }
+    body:not(.sidebar-hidden) .main { margin-left: 0; }
+    body:not(.sidebar-hidden)::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(13,27,42,0.35);
+      z-index: 25;
+      cursor: pointer;
+    }
     .stats-row { grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .stat-value { font-size: 42px; }
     .stat-label { font-size: 13px; }
@@ -721,7 +711,7 @@ body:not(.sidebar-hidden)::after {
     .row-2 { grid-template-columns: 2fr 1fr !important; }
     .row-2 > .tomorrow-card { display: flex !important; }
     .tom-large-section { display: none !important; }
-    .chart-wrapper { height: 500px; } 
+    .chart-wrapper { height: 500px; }
     .donut-wrapper { height: 160px; }
     .donut-stat-val { font-size: 20px; }
     .row-3 { grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -872,7 +862,6 @@ body:not(.sidebar-hidden)::after {
       </div>
     </div>
 
-    <!-- row-2: จอปกติ = กราฟ + tomorrow card | จอ 55" = กราฟเต็มแถว -->
     <div class="row-2">
       <div class="card">
         <div class="card-header">
@@ -900,7 +889,6 @@ body:not(.sidebar-hidden)::after {
         </div>
       </div>
 
-      <!-- Tomorrow card: แสดงเฉพาะจอปกติ (<1920px), ซ่อนบน TV -->
       <div class="tomorrow-card" id="tomorrowCard">
         <div class="tom-header-row">
           <h3 id="tomDateLabel">📅 พรุ่งนี้</h3>
@@ -928,7 +916,6 @@ body:not(.sidebar-hidden)::after {
         <div class="hint-text">กดที่การ์ดเพื่อดูรายละเอียด</div>
       </div>
     </div>
-    <!-- /row-2 -->
 
     <div class="row-3">
       <div class="card">
@@ -1015,10 +1002,7 @@ body:not(.sidebar-hidden)::after {
       </div>
     </div>
 
-    <!-- ══ LARGE SCREEN ONLY: Tomorrow Card section (≥1920px) ══ -->
-    <!-- แสดงเฉพาะ TV/จอ 55" — ซ่อนบนจอคอมปกติ -->
     <div class="tom-large-section" id="tomLargeSection">
-      <!-- Tomorrow summary card (ซ้าย) -->
       <div class="tomorrow-card" id="tomorrowCardLg" style="cursor:pointer">
         <div class="tom-header-row">
           <h3 id="tomDateLabelLg">📅 พรุ่งนี้</h3>
@@ -1045,7 +1029,6 @@ body:not(.sidebar-hidden)::after {
         </div>
         <div class="hint-text">กดที่การ์ดเพื่อดูรายละเอียด</div>
       </div>
-      <!-- Tomorrow donut card (ขวา) -->
       <div class="card">
         <div class="card-header">
           <div>
@@ -1075,7 +1058,6 @@ body:not(.sidebar-hidden)::after {
         </div>
       </div>
     </div>
-    <!-- /tom-large-section -->
 
     <div class="card">
       <div class="card-header">
@@ -1125,7 +1107,7 @@ body:not(.sidebar-hidden)::after {
         <div class="modal-title" id="modalTitle">รายละเอียด</div>
         <div id="modalSubtitle" style="font-size:10px;color:var(--light);margin-top:3px;font-family:'DM Mono',monospace"></div>
       </div>
-      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
+      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow=''">✕</button>
     </div>
     <div class="modal-body">
       <div class="modal-tabs" id="modalTabs"></div>
@@ -1188,7 +1170,6 @@ function deriveMonthLabelFromData(data) {
   return `${THAI_MONTHS_SHORT[parseInt(month)]} ${parseInt(year)+543}`;
 }
 
-// ── Toggle view: จอปกติ ──
 function toggleTomView(e) {
   e.stopPropagation();
   _tomViewMode = _tomViewMode==='name' ? 'inv' : 'name';
@@ -1197,21 +1178,12 @@ function toggleTomView(e) {
   renderTomLists();
 }
 
-// ── Toggle view: จอ 55" ──
 function toggleTomViewLg(e) {
   e.stopPropagation();
   _tomViewModeLg = _tomViewModeLg==='name' ? 'inv' : 'name';
   document.getElementById('tomToggleIconLg').textContent  = _tomViewModeLg==='name' ? '🔖' : '🆔';
   document.getElementById('tomToggleLabelLg').textContent = _tomViewModeLg==='name' ? 'โชว์ Inventory ID' : 'โชว์ชื่อรายการ';
   renderTomListsLg();
-}
-
-function _buildTomItemHtml(r, color) {
-  const label = (mode) => mode==='inv' ? (r.inv||'—') : (r.d||r.c||'—');
-  return (mode) => `<div class="tom-item-row" title="${r.d||''}">
-    <span class="tom-item-name" style="color:${color};font-weight:600;opacity:1">${label(mode)}</span>
-    ${r.c?`<span class="tom-cust-name">${r.c}</span>`:''}
-  </div>`;
 }
 
 function renderTomLists() {
@@ -1305,12 +1277,10 @@ function renderAll() {
   const tm = DATA[TOMORROW]||{r:0,n:0};
   const tmTotal = (tm.r||0)+(tm.n||0);
 
-  // จอปกติ
   document.getElementById('tom-total').textContent    = tmTotal;
   document.getElementById('tom-ready').textContent    = tm.r||0;
   document.getElementById('tom-notready').textContent = tm.n||0;
 
-  // จอ 55"
   document.getElementById('tom-total-lg').textContent    = tmTotal;
   document.getElementById('tom-ready-lg').textContent    = tm.r||0;
   document.getElementById('tom-notready-lg').textContent = tm.n||0;
@@ -1318,14 +1288,12 @@ function renderAll() {
   renderTomLists();
   renderTomListsLg();
 
-  // จอปกติ: tomorrow card click
   document.getElementById('tomorrowCard').onclick = e => {
     if (!e.target.closest('.tomorrow-pill')&&!e.target.closest('.tom-toggle-btn')) openDayModal(TOMORROW,'all');
   };
   document.getElementById('tomReadyPill').onclick    = e => { e.stopPropagation(); openDayModal(TOMORROW,'ready'); };
   document.getElementById('tomNotReadyPill').onclick = e => { e.stopPropagation(); openDayModal(TOMORROW,'not_ready'); };
 
-  // จอ 55": tomorrow card click
   document.getElementById('tomorrowCardLg').onclick = e => {
     if (!e.target.closest('.tomorrow-pill')&&!e.target.closest('.tom-toggle-btn')) openDayModal(TOMORROW,'all');
   };
@@ -1504,6 +1472,7 @@ function openDayModal(dateKey,tab) {
   window._mDate = dateKey;
   renderModalTable(tab);
   document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
 function switchTab(tab) {
@@ -1572,7 +1541,8 @@ function renderModalTable(tab) {
         extraCell=`<div style="font-weight:600;color:var(--green);font-size:11px;font-family:'DM Mono',monospace">+${fmt(r.shipped)}</div>
                    <div style="font-size:9px;color:var(--gold)">ส่งเมื่อ ${thaiDate(r.shipDate)}</div>`;
       } else if (r._type==='sent') {
-        extraCell=`<div style="font-weight:600;color:var(--accent);font-size:11px;font-family:'DM Mono',monospace">${fmt(r.shipped)}</div>`;
+        extraCell=`<div style="font-weight:600;color:var(--accent);font-size:11px;font-family:'DM Mono',monospace">${fmt(r.shipped)}</div>`
+          +(r.partial?`<div style="font-size:9px;color:var(--gold);margin-top:2px">บางส่วน · BPO: ${fmt(r.balPO)}</div>`:'');
       }
       return `<tr>
         <td style="color:var(--light);font-size:10px;font-weight:600;font-family:'DM Mono',monospace">${idx+1}</td>
@@ -1582,7 +1552,7 @@ function renderModalTable(tab) {
         <td style="font-weight:500;font-family:'DM Mono',monospace">${fmt(r.due)}</td>
         <td style="font-weight:500;font-family:'DM Mono',monospace;color:${(r.stock||0)>0?'var(--green)':'var(--light)'}">${fmt(r.stock)}</td>
         <td>${extraCell}</td>
-        <td>${statusBadge(r._type)}</td>
+        <td>${r._type==='sent'&&r.partial?'<span class="badge badge-amber">ส่งบางส่วน</span>':statusBadge(r._type)}</td>
       </tr>`;
     }).join('')||`<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--light);font-size:11px">ไม่มีรายการ</td></tr>`;
     return;
@@ -1604,8 +1574,8 @@ function renderModalTable(tab) {
       <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--dark-blue)" title="${r.d}">${r.d}</td>
       <td style="font-weight:500;font-family:'DM Mono',monospace">${fmt(r.due)}</td>
       <td style="font-weight:600;color:var(--accent);font-family:'DM Mono',monospace">${fmt(r.shipped)}</td>
-      <td style="font-weight:600;color:var(--green);font-family:'DM Mono',monospace">${r.balPO!==undefined&&r.balPO!==null ? fmt(r.balPO) : '—'}</td>
-      <td>${statusBadge('sent')}</td>
+      <td style="font-weight:600;color:${(r.balPO||0)<0?'var(--red)':'var(--green)'};font-family:'DM Mono',monospace">${r.balPO!==undefined&&r.balPO!==null ? fmt(r.balPO) : '—'}</td>
+      <td>${r.partial?'<span class="badge badge-amber">ส่งบางส่วน</span>':statusBadge('sent')}</td>
     </tr>`).join('')||`<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--light);font-size:11px">ไม่มีรายการ</td></tr>`;
     return;
   }
@@ -1682,7 +1652,7 @@ function renderModalTable(tab) {
   }).join('')||`<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--light);font-size:11px">ไม่มีรายการ</td></tr>`;
 }
 
-function closeModal(e) { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeModal(e) { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
 
 function filterTable(f) {
   ['all','yd','td','tm'].forEach(x=>document.getElementById('btn-'+x).classList.toggle('active',x===f));
@@ -1870,8 +1840,43 @@ async function parseExcelFileFromBytes(uint8Array,fileName) {
           const balPO=balPOByDate.hasOwnProperty(dueDate)?balPOByDate[dueDate]:null;
           const entry={c:customer,d:detail,inv:invId,due:dueQty,stock:stockQty,dk:dueDate};
 
+          // ══════════════════════════════════════════════════════════
+          // BLOCK 1: วันที่ผ่านมาแล้ว (dueDate < TODAY)
+          // ══════════════════════════════════════════════════════════
           if (dueDate<TODAY) {
-            if (shipped>0&&shipped>=dueQty){dataOut[dueDate].sent+=1;dataOut[dueDate].sent_list.push({...entry,shipped,balPO:balPO??null});continue;}
+            if (shipped>0) {
+              if (balPO!==null&&balPO<0) {
+                // ✅ FIX: ส่งบางส่วน + balPO ยังติดลบ
+                // → นับใน sent_list เป็น partial
+                // → สร้าง overdue ใน future dates สำหรับส่วนที่ยังค้าง
+                dataOut[dueDate].sent+=1;
+                dataOut[dueDate].sent_list.push({...entry,shipped,balPO,partial:true});
+                const ovEntry={...entry,origDue:dueDate,balPO};
+                for (const [c2,ds2] of sortedDateCols) {
+                  if (ds2<=dueDate) continue;
+                  if (ds2>TOMORROW) break;
+                  if (!dataOut[ds2]) continue;
+                  const balOnDs2=balPOByDate.hasOwnProperty(ds2)?balPOByDate[ds2]:null;
+                  const shipOnDs2=shipByDate[ds2]||0;
+                  if (balOnDs2!==null&&balOnDs2>=0&&shipOnDs2>0) {
+                    const alreadyLate=(dataOut[ds2].late_list||[]).some(x=>x.inv===invId&&x.origDue===dueDate);
+                    if (!alreadyLate){dataOut[ds2].l+=1;dataOut[ds2].late_list.push({...entry,dk:ds2,origDue:dueDate,shipDate:ds2,shipped:shipOnDs2});}
+                    break;
+                  }
+                  if (balOnDs2!==null&&balOnDs2>=0) break;
+                  if (ds2>=TODAY) {
+                    const alreadyOv=(dataOut[ds2].overdue||[]).some(x=>x.inv===invId&&x.origDue===dueDate);
+                    if (!alreadyOv){dataOut[ds2].ov+=1;dataOut[ds2].overdue.push({...ovEntry,dk:ds2,balPO:balOnDs2??balPO});}
+                  }
+                }
+              } else {
+                // ส่งครบแล้ว (balPO >= 0 หรือ null)
+                dataOut[dueDate].sent+=1;
+                dataOut[dueDate].sent_list.push({...entry,shipped,balPO:balPO??null,partial:false});
+              }
+              continue;
+            }
+            // ไม่มี shipment เลย แต่ balPO ติดลบ → ค้างส่ง
             if (balPO!==null&&balPO<0) {
               const ovEntry={...entry,origDue:dueDate,balPO};
               dataOut[dueDate].ov+=1;dataOut[dueDate].overdue.push({...ovEntry,dk:dueDate});
@@ -1897,15 +1902,42 @@ async function parseExcelFileFromBytes(uint8Array,fileName) {
               }
               continue;
             }
-            if (shipped>0&&shipped<dueQty){dataOut[dueDate].sent+=1;dataOut[dueDate].sent_list.push({...entry,shipped,balPO:balPO??null});continue;}
             continue;
+
+          // ══════════════════════════════════════════════════════════
+          // BLOCK 2: วันนี้และอนาคต (dueDate >= TODAY)
+          // ══════════════════════════════════════════════════════════
           } else {
             if (balPO!==null&&balPO>=0) {
+              // ส่งครบแล้ว
               dataOut[dueDate].sent+=1;
-              dataOut[dueDate].sent_list.push({...entry,shipped:shipped||dueQty,balPO:balPO??null});
-            } else if (dueDate===TODAY&&shipped>0&&shipped>=dueQty) {
+              dataOut[dueDate].sent_list.push({...entry,shipped:shipped||dueQty,balPO:balPO??null,partial:false});
+            } else if (shipped>0&&balPO!==null&&balPO<0) {
+              // ✅ FIX: ส่งบางส่วน (วันนี้/อนาคต) + balPO ติดลบ
+              // → นับใน sent_list เป็น partial
+              // → สร้าง overdue ใน future dates สำหรับส่วนที่ยังค้าง
               dataOut[dueDate].sent+=1;
-              dataOut[dueDate].sent_list.push({...entry,shipped,balPO:balPO??null});
+              dataOut[dueDate].sent_list.push({...entry,shipped,balPO,partial:true});
+              const ovEntry={...entry,origDue:dueDate,balPO};
+              for (const [c2,ds2] of sortedDateCols) {
+                if (ds2<=dueDate) continue;
+                if (ds2>TOMORROW) break;
+                if (!dataOut[ds2]) continue;
+                const balOnDs2=balPOByDate.hasOwnProperty(ds2)?balPOByDate[ds2]:null;
+                const shipOnDs2=shipByDate[ds2]||0;
+                if (balOnDs2!==null&&balOnDs2>=0&&shipOnDs2>0) {
+                  const alreadyLate=(dataOut[ds2].late_list||[]).some(x=>x.inv===invId&&x.origDue===dueDate);
+                  if (!alreadyLate){dataOut[ds2].l+=1;dataOut[ds2].late_list.push({...entry,dk:ds2,origDue:dueDate,shipDate:ds2,shipped:shipOnDs2});}
+                  break;
+                }
+                if (balOnDs2!==null&&balOnDs2>=0) break;
+                const alreadyOv=(dataOut[ds2].overdue||[]).some(x=>x.inv===invId&&x.origDue===dueDate);
+                if (!alreadyOv){dataOut[ds2].ov+=1;dataOut[ds2].overdue.push({...ovEntry,dk:ds2,balPO:balOnDs2??balPO});}
+              }
+            } else if (shipped>0) {
+              // ส่งบางส่วน แต่ balPO ไม่ทราบสถานะ → นับเป็น sent
+              dataOut[dueDate].sent+=1;
+              dataOut[dueDate].sent_list.push({...entry,shipped,balPO:balPO??null,partial:shipped<dueQty});
             } else if (stockQty>=dueQty) {
               dataOut[dueDate].r+=1;
               dataOut[dueDate].ready.push({...entry});
